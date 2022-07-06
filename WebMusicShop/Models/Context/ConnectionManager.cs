@@ -1,8 +1,9 @@
 ﻿using System.Data.SqlClient;
+using WebMusicShop.Models.Interfaces;
 
 namespace WebMusicShop.Models.Context
 {
-    public class ConnectionManager
+    public class ConnectionManager : IConnectionManager
     {
         public static string _connStrName;
         private static SqlConnection connection;

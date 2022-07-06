@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebMusicShop.Models.Entities;
-using WebMusicShop.Models.Interfaces;
+using WebMusicShop.Models.Interfaces.ICliente;
 
 namespace WebMusicShop.Controllers
 {

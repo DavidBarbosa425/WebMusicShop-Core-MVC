@@ -1,6 +1,8 @@
-﻿using System.Data.SqlClient;
+﻿using System.Data;
+using System.Data.SqlClient;
 using WebMusicShop.Models.Entities;
 using WebMusicShop.Models.Interfaces;
+using WebMusicShop.Models.Interfaces.ICliente;
 
 namespace WebMusicShop.Models.Context
 {
@@ -8,7 +10,7 @@ namespace WebMusicShop.Models.Context
     {
         private readonly SqlConnection _connection;
 
-        public ClienteContext(ConnectionManager connectionManager)
+        public ClienteContext(IConnectionManager connectionManager)
         {
             _connection = connectionManager.GetConnection("MusicShop");
         }
@@ -16,12 +18,13 @@ namespace WebMusicShop.Models.Context
         {
             try
             {
-                string proc = "exec SpIns_Cliente @Nome,@CPF";
+                string proc = "exec SpIns_Cliente";
                 SqlCommand commIns = new SqlCommand(proc, _connection);
+                commIns.CommandType = CommandType.StoredProcedure;
 
                 _connection.Open();
-                commIns.Parameters.Add("@Nome", System.Data.SqlDbType.VarChar).Value = cliente.Nome;
-                commIns.Parameters.Add("@CPF", System.Data.SqlDbType.VarChar).Value = cliente.CPF;
+                commIns.Parameters.Add("@Nome", SqlDbType.VarChar).Value = cliente.Nome;
+                commIns.Parameters.Add("@CPF", SqlDbType.VarChar).Value = cliente.CPF;
                 commIns.ExecuteNonQuery();
 
             }
@@ -34,5 +37,7 @@ namespace WebMusicShop.Models.Context
                 _connection.Close();
             }
         }
+
+
     }
 }

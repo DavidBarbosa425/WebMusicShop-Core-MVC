@@ -1,5 +1,6 @@
 using WebMusicShop.Models.Context;
 using WebMusicShop.Models.Interfaces;
+using WebMusicShop.Models.Interfaces.ICliente;
 using WebMusicShop.Models.Repositories;
 using WebMusicShop.Models.Services;
 
@@ -7,7 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddScoped<IClienteContext, ClienteContext>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
-builder.Services.AddScoped<ConnectionManager>();
+builder.Services.AddScoped<IConnectionManager,ConnectionManager>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
