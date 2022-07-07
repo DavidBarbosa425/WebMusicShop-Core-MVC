@@ -44,5 +44,32 @@ namespace WebMusicShop.Controllers
            Cliente cliente = _clienteService.BuscaCliente(id);
             return View(cliente);
         }
+
+
+        public IActionResult AtualizaCliente(int id)
+        {
+            var cliente = _clienteService.BuscaCliente(id);
+            return View(cliente);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AtualizaCliente([Bind("Id, Nome, CPF")] Cliente cliente)
+        {
+            _clienteService.AtualizarClienteService(cliente);
+            return RedirectToAction("ListarClientes");
+        }
+
+        public IActionResult DeletarCliente(int id)
+        {
+            Cliente cliente = _clienteService.BuscaCliente(id);
+            return View(cliente);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletarCliente([Bind("Id")] Cliente cliente)
+        {
+            _clienteService.DeletarClienteService(cliente.Id);
+            return RedirectToAction("ListarClientes");
+        }
     }
 }

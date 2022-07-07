@@ -15,12 +15,20 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\DAVID\Documents\Estudos\WebMusicShop\WebMusicShop
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/DAVID/Documents/Estudos/WebMusicShop/WebMusicShop/Views/Cliente/AtualizaCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxBdHVhbGl6YUNsaWVudGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/DAVID/Documents/Estudos/WebMusicShop/WebMusicShop/Views/Cliente/BuscaCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxCdXNjYUNsaWVudGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/DAVID/Documents/Estudos/WebMusicShop/WebMusicShop/Views/Cliente/CadastrarCliente.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxDYWRhc3RyYXJDbGllbnRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/DAVID/Documents/Estudos/WebMusicShop/WebMusicShop/Views/Cliente/DeletarCliente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2xpZW50ZVxEZWxldGFyQ2xpZW50ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/DAVID/Documents/Estudos/WebMusicShop/WebMusicShop/Views/Cliente/ListarClientes.cshtml]

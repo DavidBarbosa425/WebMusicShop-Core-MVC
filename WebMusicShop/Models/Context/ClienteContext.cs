@@ -74,5 +74,47 @@ namespace WebMusicShop.Models.Context
                 _connection.Close();
             }
         }
+        public void AtualizarClienteContext(Cliente cliente)
+        {
+            try
+            {
+                string proc = "SpUpd_Cliente";
+                SqlCommand commIns = new SqlCommand(proc, _connection);
+                commIns.CommandType = CommandType.StoredProcedure;
+
+                _connection.Open();
+                commIns.Parameters.Add("Id", SqlDbType.Int).Value = cliente.Id;
+                commIns.Parameters.Add("Nome", SqlDbType.VarChar).Value = cliente.Nome;
+                commIns.Parameters.Add("CPF", SqlDbType.VarChar).Value = cliente.CPF;
+                commIns.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+
+        public void DeletarClienteContext(int id)
+        {
+            try
+            {
+                string proc = "SpDel_Cliente";
+                SqlCommand commDel = new SqlCommand(proc, _connection);
+                commDel.CommandType = CommandType.StoredProcedure;
+
+                _connection.Open();
+                commDel.Parameters.Add("@Id", SqlDbType.Int).Value = id;
+                commDel.ExecuteNonQuery();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally { _connection.Close(); }
+        }
     }
 }

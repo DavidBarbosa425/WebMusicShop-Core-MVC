@@ -7,5 +7,7 @@ namespace WebMusicShop.Models.Interfaces.ICliente
         void CadastrarClienteService(Cliente cliente);
         List<Cliente> ListarClientesService();
         Cliente BuscaCliente(int id);
+        void AtualizarClienteService(Cliente cliente);
+        void DeletarClienteService(int id);
     }
 }

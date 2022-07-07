@@ -31,7 +31,7 @@ namespace WebMusicShop.Models.Services
             try
             {
                 List<Cliente> Clientes = _clienteRepository.ListarClientesRepository();
-                List<Cliente> clientesOrdenados = Clientes.OrderBy(x => x.Id).ToList();
+                List<Cliente> clientesOrdenados = Clientes.Where(x => x.Nome != null).OrderBy(x => x.Id).ToList();
                 return clientesOrdenados;
             }
             catch (Exception ex)
@@ -51,6 +51,17 @@ namespace WebMusicShop.Models.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public void AtualizarClienteService(Cliente cliente)
+        {
+
+            _clienteRepository.AtualizaClienteRepository(cliente);
+        }
+
+        public void DeletarClienteService(int id)
+        {
+            _clienteRepository.DeletarClienteRepository(id);
         }
     }
 }

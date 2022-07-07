@@ -1,11 +1,12 @@
 ﻿@model WebMusicShop.Models.Entities.Cliente
 
 @{
-    ViewData["Title"] = "Cliente";
+    ViewData["Title"] = "DeletarCliente";
 }
 
-<h1>@ViewData["Title"]</h1>
+<h1>Deletar Cliente</h1>
 
+<h3>Tem certeza que deseja deletar esse cliente?</h3>
 <div>
     <h4>Cliente</h4>
     <hr />
@@ -29,8 +30,9 @@
             @Html.DisplayFor(model => model.CPF)
         </dd>
     </dl>
-</div>
-<div>
-    @Html.ActionLink("Atualizar", "AtualizaCliente", new { id = Model.Id }, new {@class = "btn btn-primary"})
-    <a asp-action="ListarClientes" class="btn btn-success">Ir para Lista de Clientes</a>
+    
+    <form asp-action="DeletarCliente">
+        <input type="submit" value="Deletar" class="btn btn-danger" /> 
+        <a class="btn btn-success" asp-action="ListarClientes">Ir para Lista de Clientes</a>
+    </form>
 </div>

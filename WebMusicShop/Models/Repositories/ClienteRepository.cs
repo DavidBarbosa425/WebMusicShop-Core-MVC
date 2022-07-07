@@ -22,5 +22,15 @@ namespace WebMusicShop.Models.Repositories
            List<Cliente> Clientes = _context.ListarClientesContext();
            return Clientes;
         }
+
+        public void AtualizaClienteRepository(Cliente cliente)
+        {
+            _context.AtualizarClienteContext(cliente);
+        }
+
+        public void DeletarClienteRepository(int id)
+        {
+            _context.DeletarClienteContext(id);
+        }
     }
 }

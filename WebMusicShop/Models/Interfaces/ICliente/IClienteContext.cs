@@ -6,5 +6,7 @@ namespace WebMusicShop.Models.Interfaces.ICliente
     {
         void CadastrarClienteContext(Cliente cliente);
         List<Cliente> ListarClientesContext();
+        void AtualizarClienteContext(Cliente cliente);
+        void DeletarClienteContext(int id);
     }
 }

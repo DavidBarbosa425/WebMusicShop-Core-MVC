@@ -37,9 +37,9 @@
                 @Html.DisplayFor(modelItem => item.CPF)
             </td>
             <td>
-                @Html.ActionLink("Atualizar", "Edit", new { id = item.Id },new{ @class = "btn btn-primary"})
+                @Html.ActionLink("Atualizar", "AtualizaCliente", new { id = item.Id },new{ @class = "btn btn-primary"})
                 @Html.ActionLink("Detalhes", "BuscaCliente", new { id = item.Id },new{ @class = "btn btn-success"})
-                @Html.ActionLink("Deletar", "Delete", new { id = item.Id },new{ @class = "btn btn-danger"})
+                @Html.ActionLink("Deletar", "DeletarCliente", new { id = item.Id },new{ @class = "btn btn-danger"})
             </td>
         </tr>
 }
