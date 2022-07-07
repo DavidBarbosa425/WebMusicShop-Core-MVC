@@ -12,9 +12,15 @@ namespace WebMusicShop.Models.Repositories
             _context = context;
         }
 
+
         void IClienteRepository.CadastrarClienteRepository(Cliente cliente)
         {
            _context.CadastrarClienteContext(cliente);
+        }
+        public List<Cliente> ListarClientesRepository()
+        {
+           List<Cliente> Clientes = _context.ListarClientesContext();
+           return Clientes;
         }
     }
 }

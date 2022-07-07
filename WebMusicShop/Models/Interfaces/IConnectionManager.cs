@@ -4,6 +4,7 @@ namespace WebMusicShop.Models.Interfaces
 {
     public interface IConnectionManager
     {
-        public SqlConnection GetConnection(string connStrName);
+       SqlConnection GetConnection();
+    
     }
 }

@@ -5,18 +5,18 @@ namespace WebMusicShop.Models.Context
 {
     public class ConnectionManager : IConnectionManager
     {
-        public static string _connStrName;
-        private static SqlConnection connection;
+        private static string _connStrName = "MusicShop";
+        private static SqlConnection connection = null;
 
         public ConnectionManager(IConfiguration configuration)
         {
             var connStr = configuration.GetConnectionString(_connStrName);
-            connection = new SqlConnection(connStr);
+            if (connection == null)
+                connection = new SqlConnection(connStr);
         }
 
-        public SqlConnection GetConnection(string connStrName)
+        public SqlConnection GetConnection()
         {
-            _connStrName = connStrName;
             return connection;
         }
     }

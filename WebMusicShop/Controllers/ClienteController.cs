@@ -32,5 +32,17 @@ namespace WebMusicShop.Controllers
         {
            return View();
         }
+
+        public IActionResult ListarClientes()
+        {
+           List<Cliente> clientes = _clienteService.ListarClientesService();
+           return View(clientes);
+        }
+
+        public IActionResult BuscaCliente(int id)
+        {
+           Cliente cliente = _clienteService.BuscaCliente(id);
+            return View(cliente);
+        }
     }
 }
