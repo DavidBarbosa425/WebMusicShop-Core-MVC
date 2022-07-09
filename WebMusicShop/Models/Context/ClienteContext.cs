@@ -29,7 +29,7 @@ namespace WebMusicShop.Models.Context
                 commIns.Parameters.Add("@CPF", SqlDbType.VarChar).Value = cliente.CPF;
                 commIns.Parameters.Add("@Email", SqlDbType.VarChar).Value = cliente.Email;
                 commIns.Parameters.Add("@Telefone", SqlDbType.VarChar).Value = cliente.Telefone;
-                commIns.Parameters.Add("@Status", SqlDbType.Int).Value = cliente.Status;
+                commIns.Parameters.Add("@StatusId", SqlDbType.Int).Value =Convert.ToInt32(cliente.Status);
                 commIns.ExecuteNonQuery();
 
             }
@@ -65,7 +65,7 @@ namespace WebMusicShop.Models.Context
                     cliente.CPF = dataReader.GetString("CPF");
                     cliente.Email = dataReader.GetString("Email");
                     cliente.Telefone = dataReader.GetString("Telefone");
-                    cliente.Status = dataReader.GetInt32("Status");
+                    cliente.Status = dataReader.GetString("Status");
                     Clientes.Add(cliente);
                 }
 
@@ -94,7 +94,7 @@ namespace WebMusicShop.Models.Context
                 commIns.Parameters.Add("CPF", SqlDbType.VarChar).Value = cliente.CPF;
                 commIns.Parameters.Add("Email", SqlDbType.VarChar).Value = cliente.Email;
                 commIns.Parameters.Add("Telefone", SqlDbType.VarChar).Value = cliente.Telefone;
-                commIns.Parameters.Add("Status", SqlDbType.Int).Value = cliente.Status;
+                commIns.Parameters.Add("StatusId", SqlDbType.Int).Value = Convert.ToInt32(cliente.Status);
                 commIns.ExecuteNonQuery();
             }
             catch (Exception ex)

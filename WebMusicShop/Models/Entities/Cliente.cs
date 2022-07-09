@@ -19,6 +19,7 @@ namespace WebMusicShop.Models.Entities
         [Required(ErrorMessage ="Campo Telefone é obrigatório")]
         public string Telefone { get; set; }
         [Required(ErrorMessage = "Campo Status é obrigatório")]
-        public int Status { get; set; }
+        public int StatusId { get; set; }
+        public string Status { get; set; }
     }
 }
