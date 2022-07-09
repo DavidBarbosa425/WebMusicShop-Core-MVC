@@ -27,5 +27,10 @@ namespace WebMusicShop.Models.Repositories
         {
             _produtoContext.AtualizarProdutoContext(produto);
         }
+
+        public void DeletaProdutoRepository(int id)
+        {
+            _produtoContext.DeletaProdutoContext(id);
+        }
     }
 }

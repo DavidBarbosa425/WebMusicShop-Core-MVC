@@ -7,5 +7,6 @@ namespace WebMusicShop.Models.Interfaces.IProduto
         void CadastraProdutoContext(Produto produto);
         List<Produto> ListarProdutosContext();
         void AtualizarProdutoContext(Produto produto);
+        void DeletaProdutoContext(int id);
     }
 }

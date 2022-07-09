@@ -64,5 +64,17 @@ namespace WebMusicShop.Models.Services
             }
             
         }
+
+        public void DeletaProdutoService(int id)
+        {
+            try
+            {
+                _produtoRepository.DeletaProdutoRepository(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

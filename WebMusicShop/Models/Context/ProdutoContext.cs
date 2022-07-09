@@ -27,8 +27,8 @@ namespace WebMusicShop.Models.Context
                 _connection.Open();
                 cmdIns.Parameters.Add("Tipo", SqlDbType.VarChar).Value = produto.Tipo;
                 cmdIns.Parameters.Add("Descricao", SqlDbType.VarChar).Value = produto.Descricao;
-                cmdIns.Parameters.Add("PrecoCusto", SqlDbType.Decimal).Value = produto.PrecoCusto;
-                cmdIns.Parameters.Add("PrecoVenda", SqlDbType.Decimal).Value = produto.PrecoVenda;
+                cmdIns.Parameters.Add("PrecoCusto", SqlDbType.Decimal).Value = produto.PrecoCusto.Replace("R$","");
+                cmdIns.Parameters.Add("PrecoVenda", SqlDbType.Decimal).Value = produto.PrecoVenda.Replace("R$", "");
                 cmdIns.Parameters.Add("QtdEstoque", SqlDbType.VarChar).Value = produto.QtdEstoque;
                 cmdIns.ExecuteNonQuery();
             }
@@ -102,6 +102,29 @@ namespace WebMusicShop.Models.Context
             {
                 _connection.Close();
             }
+        }
+
+        public void DeletaProdutoContext(int id)
+        {
+            try
+            {
+                string proc = "SpDel_Produto";
+                SqlCommand cmdDel = new SqlCommand(proc, _connection);
+                cmdDel.CommandType = CommandType.StoredProcedure;
+                _connection.Open();
+
+                cmdDel.Parameters.Add("Id", SqlDbType.Int).Value = id;
+                cmdDel.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
         }
     }
 }

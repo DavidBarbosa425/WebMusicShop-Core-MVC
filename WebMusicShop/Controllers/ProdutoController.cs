@@ -22,8 +22,18 @@ namespace WebMusicShop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CadastraProduto([Bind("Tipo,Descricao,PrecoCusto,PrecoVenda,QtdEstoque")] Produto produto)
         {
-            _produtoService.CadastraProdutoService(produto);
-            return RedirectToAction("index", "home");
+            try
+            {
+                _produtoService.CadastraProdutoService(produto);
+                TempData["MensagemSucesso"] = "Produto cadastrado com sucesso!";
+                return RedirectToAction("ListarProdutos");
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao cadastrar produto, detalhes:{ex.Message}";
+                return RedirectToAction("ListarProdutos");
+            }
+
         }
 
         public IActionResult ListarProdutos()
@@ -47,15 +57,46 @@ namespace WebMusicShop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AtualizaProduto([Bind("Id,Tipo,Descricao,PrecoCusto,PrecoVenda,QtdEstoque")] Produto produto)
         {
-            if (produto.QtdEstoque < 0)
+            try
             {
-                TempData["MensagemErro"] = "Quantidade em Estoque não pode ser menor do que 0";
-                return RedirectToAction("AtualizaProduto");
+                if (produto.QtdEstoque < 0)
+                {
+                    TempData["MensagemErro"] = "Quantidade em Estoque não pode ser menor do que 0";
+                    return RedirectToAction("AtualizaProduto");
+                }
+
+                _produtoService.AtualizaProdutoService(produto);
+                TempData["MensagemSucesso"] = "Produto Atualizado com sucesso!";
+                return RedirectToAction("ListarProdutos");
+            }
+            catch(Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao atualizar produto, detalhes: {ex.Message}";
+                return RedirectToAction("ListarProdutos");
+            }
+        }
+
+        public IActionResult DeletaProduto(int id)
+        {
+            Produto produto = _produtoService.BuscaProdutoService(id);
+            return View(produto);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletaProduto([Bind("Id")]Produto produto)
+        {
+            try
+            {
+                _produtoService.DeletaProdutoService(produto.Id);
+                TempData["MensagemSucesso"] = "Produto deletado com sucesso!";
+                return RedirectToAction("ListarProdutos");
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao deletar produto, detalhes:{ex.Message}";
+                return RedirectToAction("ListarProdutos");
             }
 
-            _produtoService.AtualizaProdutoService(produto);
-            TempData["MensagemSucesso"] = "Produto Atualizado com sucesso!";
-            return RedirectToAction("ListarProdutos");
         }
     }
 }
