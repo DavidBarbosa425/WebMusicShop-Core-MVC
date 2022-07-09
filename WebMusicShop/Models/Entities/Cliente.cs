@@ -11,5 +11,14 @@ namespace WebMusicShop.Models.Entities
         public string Nome { get; set; }
         [Required(ErrorMessage = "Campo CPF é obrigatório")]
         public string CPF { get; set; }
+        [Required(ErrorMessage ="Campo Email é obrigatório")]
+        [DataType(DataType.EmailAddress, ErrorMessage ="Endereço de email inválido")]
+        public string Email { get; set; }
+        [Phone]
+        [DataType(DataType.PhoneNumber, ErrorMessage ="Número de telefone inválido")]
+        [Required(ErrorMessage ="Campo Telefone é obrigatório")]
+        public string Telefone { get; set; }
+        [Required(ErrorMessage = "Campo Status é obrigatório")]
+        public int Status { get; set; }
     }
 }
