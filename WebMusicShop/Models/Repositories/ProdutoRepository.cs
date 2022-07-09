@@ -12,6 +12,7 @@ namespace WebMusicShop.Models.Repositories
             _produtoContext = produtoContext;
         }
 
+
         public void CadastraProdutoRepository(Produto produto)
         {
             _produtoContext.CadastraProdutoContext(produto);

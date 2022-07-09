@@ -43,8 +43,10 @@ namespace WebMusicShop.Models.Services
         {
             try
             {
-                List<Cliente> Clientes = _clienteRepository.ListarClientesRepository();
-                Cliente cliente = Clientes.FirstOrDefault(x => x.Id == id);
+                Cliente? cliente = _clienteRepository
+                                        .ListarClientesRepository()
+                                        .FirstOrDefault(x => x.Id == id);
+            
                 return cliente;
             }
             catch (Exception ex)

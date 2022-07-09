@@ -11,6 +11,8 @@ namespace WebMusicShop.Models.Services
         {
             _produtoRepository = produtoRepository;
         }
+
+
         public void CadastraProdutoService(Produto produto)
         {
             try
@@ -29,6 +31,20 @@ namespace WebMusicShop.Models.Services
             {
                 List<Produto> produtos = _produtoRepository.ListarProdutosRepository();
                 return produtos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public Produto BuscaProdutoService(int id)
+        {
+            try
+            {
+                Produto? produto = _produtoRepository
+                                    .ListarProdutosRepository()
+                                    .FirstOrDefault(x => x.Id == id);
+                return produto;
             }
             catch (Exception ex)
             {

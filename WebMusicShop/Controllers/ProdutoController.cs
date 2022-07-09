@@ -31,5 +31,11 @@ namespace WebMusicShop.Controllers
             List<Produto> produtos = _produtoService.ListarProdutosService();
             return View(produtos);
         }
+
+        public IActionResult BuscaProduto(int id)
+        {
+           Produto produto = _produtoService.BuscaProdutoService(id);
+            return View(produto);
+        }
     }
 }
