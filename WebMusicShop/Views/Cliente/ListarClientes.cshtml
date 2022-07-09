@@ -6,10 +6,19 @@
 
 <h1>@ViewData["Title"]</h1>
 
+@if(TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        @TempData["MensagemErro"]
+         <button class="btn btn-close float-end"></button>
+    </div>
+}
+
 <p>
     <a class="btn btn-success" asp-action="CadastrarCliente">Cadastrar um Novo Cliente</a>
 </p>
-<table class="table table-hover">
+
+<table class="table table-hover ">
     <thead>
         <tr>
             <th>

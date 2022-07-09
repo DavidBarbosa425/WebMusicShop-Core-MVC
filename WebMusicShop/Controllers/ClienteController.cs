@@ -35,41 +35,93 @@ namespace WebMusicShop.Controllers
 
         public IActionResult ListarClientes()
         {
-           List<Cliente> clientes = _clienteService.ListarClientesService();
-           return View(clientes);
+            try
+            {
+                List<Cliente> clientes = _clienteService.ListarClientesService();
+                return View(clientes);
+            }
+            catch(Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao exibir lista de clientes, detalhes: {ex.Message}";
+                return RedirectToAction("index","home");
+            }
         }
 
         public IActionResult BuscaCliente(int id)
         {
-           Cliente cliente = _clienteService.BuscaCliente(id);
-            return View(cliente);
+            try
+            {
+                Cliente cliente = _clienteService.BuscaCliente(id);
+                return View(cliente);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao buscar cliente selecionado, detalhes: {ex.Message}";
+                return RedirectToAction("ListarClientes");
+            }
         }
 
 
         public IActionResult AtualizaCliente(int id)
         {
-            var cliente = _clienteService.BuscaCliente(id);
-            return View(cliente);
+            try
+            {
+                var cliente = _clienteService.BuscaCliente(id);
+                return View(cliente);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao buscar cliente selecionado, detalhes: {ex.Message}";
+                return RedirectToAction("ListarClientes");
+            }
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AtualizaCliente([Bind("Id, Nome, CPF")] Cliente cliente)
         {
-            _clienteService.AtualizarClienteService(cliente);
-            return RedirectToAction("ListarClientes");
+            try
+            {
+                _clienteService.AtualizarClienteService(cliente);
+                return RedirectToAction("ListarClientes");
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro na atualização do cliente, detalhes: {ex.Message}";
+                return RedirectToAction("ListarClientes");
+            }
+
         }
 
         public IActionResult DeletarCliente(int id)
         {
-            Cliente cliente = _clienteService.BuscaCliente(id);
-            return View(cliente);
+            try
+            {
+                Cliente cliente = _clienteService.BuscaCliente(id);
+                return View(cliente);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao buscar cliente selecionado, detalhes: {ex.Message}";
+                return RedirectToAction("ListarClientes");
+            }
+
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DeletarCliente([Bind("Id")] Cliente cliente)
         {
-            _clienteService.DeletarClienteService(cliente.Id);
-            return RedirectToAction("ListarClientes");
+            try
+            {
+                _clienteService.DeletarClienteService(cliente.Id);
+                return RedirectToAction("ListarClientes");
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = $"Erro ao deletar cliente, detalhes: {ex.Message}";
+                return RedirectToAction("ListarClientes");
+            }
+
         }
     }
 }

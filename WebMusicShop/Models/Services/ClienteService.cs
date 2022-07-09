@@ -55,13 +55,27 @@ namespace WebMusicShop.Models.Services
 
         public void AtualizarClienteService(Cliente cliente)
         {
-
-            _clienteRepository.AtualizaClienteRepository(cliente);
+            try
+            {
+                _clienteRepository.AtualizaClienteRepository(cliente);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public void DeletarClienteService(int id)
         {
-            _clienteRepository.DeletarClienteRepository(id);
+            try
+            {
+                _clienteRepository.DeletarClienteRepository(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
         }
     }
 }
