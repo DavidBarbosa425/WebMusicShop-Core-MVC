@@ -1,14 +1,20 @@
 using WebMusicShop.Models.Context;
 using WebMusicShop.Models.Interfaces;
 using WebMusicShop.Models.Interfaces.ICliente;
+using WebMusicShop.Models.Interfaces.IProduto;
 using WebMusicShop.Models.Repositories;
 using WebMusicShop.Models.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+//Clientes
 builder.Services.AddScoped<IClienteContext, ClienteContext>();
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
 builder.Services.AddScoped<IConnectionManager,ConnectionManager>();
+//Produtos
+builder.Services.AddScoped<IProdutoContext, ProdutoContext>();
+builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
+builder.Services.AddScoped<IProdutoService, ProdutoService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
