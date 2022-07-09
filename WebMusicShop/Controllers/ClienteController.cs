@@ -18,12 +18,12 @@ namespace WebMusicShop.Controllers
             {
                 _clienteService.CadastrarClienteService(cliente);
                 TempData["MensagemSucesso"] = "Cliente Cadastrado com Sucesso!";
-                return RedirectToAction("CadastrarCliente");
+                return RedirectToAction("ListarClientes");
             }
             catch (Exception ex)
             {
                 TempData["MensagemErro"] = $"Erro ao cadastrar cliente, detalhes: {ex.Message}";
-                return RedirectToAction("CadastrarCliente");
+                return RedirectToAction("ListarClientes");
             }
 
         }
