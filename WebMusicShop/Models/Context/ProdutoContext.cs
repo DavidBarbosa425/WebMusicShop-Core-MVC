@@ -14,6 +14,8 @@ namespace WebMusicShop.Models.Context
         {
             _connection = connectionManager.GetConnection();
         }
+
+
         public void CadastraProdutoContext(Produto produto)
         {
             try
@@ -65,6 +67,32 @@ namespace WebMusicShop.Models.Context
                     produtos.Add(produto);
                 }
                 return produtos;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public void AtualizarProdutoContext(Produto produto)
+        {
+            try
+            {
+                string proc = "SpUpd_Produto";
+                SqlCommand cmdUpd = new SqlCommand(proc, _connection);
+                cmdUpd.CommandType = CommandType.StoredProcedure;
+
+                _connection.Open();
+                cmdUpd.Parameters.Add("Id", SqlDbType.Int).Value = produto.Id;
+                cmdUpd.Parameters.Add("Tipo", SqlDbType.VarChar).Value = produto.Tipo;
+                cmdUpd.Parameters.Add("Descricao", SqlDbType.VarChar).Value = produto.Descricao;
+                cmdUpd.Parameters.Add("PrecoCusto", SqlDbType.Decimal).Value = produto.PrecoCusto.Replace("R$", "");
+                cmdUpd.Parameters.Add("PrecoVenda", SqlDbType.Decimal).Value = produto.PrecoVenda.Replace("R$", "");
+                cmdUpd.Parameters.Add("QtdEstoque", SqlDbType.Int).Value = produto.QtdEstoque;
+                cmdUpd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

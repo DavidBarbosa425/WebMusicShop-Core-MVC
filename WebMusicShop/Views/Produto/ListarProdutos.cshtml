@@ -4,6 +4,14 @@
     ViewData["Title"] = "ListarProdutos";
 }
 
+@if(TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        @TempData["MensagemSucesso"]
+        <button class="btn btn-close float-end"></button>
+    </div>
+}
+
 <h1>Lista de Produtos</h1>
 
 <p>
@@ -49,7 +57,7 @@
                 @Html.DisplayFor(modelItem => item.QtdEstoque)
             </td>
             <td>
-                @Html.ActionLink("Atualizar", "Edit", new { id = item.Id }, new {@class = "btn btn-primary"}) 
+                @Html.ActionLink("Atualizar", "AtualizaProduto", new { id = item.Id }, new {@class = "btn btn-primary"}) 
                 @Html.ActionLink("Detalhes", "BuscaProduto", new { id = item.Id }, new {@class = "btn btn-success"}) 
                 @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new {@class = "btn btn-danger"})
             </td>

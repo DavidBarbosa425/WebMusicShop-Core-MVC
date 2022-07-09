@@ -23,5 +23,9 @@ namespace WebMusicShop.Models.Repositories
             List<Produto> produtos = _produtoContext.ListarProdutosContext();
             return produtos;
         }
+        public void AtualizarProdutoRepository(Produto produto)
+        {
+            _produtoContext.AtualizarProdutoContext(produto);
+        }
     }
 }

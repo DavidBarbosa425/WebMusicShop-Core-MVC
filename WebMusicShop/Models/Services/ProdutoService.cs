@@ -51,5 +51,18 @@ namespace WebMusicShop.Models.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public void AtualizaProdutoService(Produto produto)
+        {
+            try
+            {
+                _produtoRepository.AtualizarProdutoRepository(produto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
     }
 }

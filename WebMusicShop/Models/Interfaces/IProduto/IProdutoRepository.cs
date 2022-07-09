@@ -6,5 +6,6 @@ namespace WebMusicShop.Models.Interfaces.IProduto
     {
         void CadastraProdutoRepository(Produto produto);
         List<Produto> ListarProdutosRepository();
+        void AtualizarProdutoRepository(Produto produto);
     }
 }

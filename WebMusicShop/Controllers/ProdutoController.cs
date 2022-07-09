@@ -37,5 +37,25 @@ namespace WebMusicShop.Controllers
            Produto produto = _produtoService.BuscaProdutoService(id);
             return View(produto);
         }
+
+        public IActionResult AtualizaProduto(int id)
+        {
+            Produto produto = _produtoService.BuscaProdutoService(id);
+            return View(produto);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AtualizaProduto([Bind("Id,Tipo,Descricao,PrecoCusto,PrecoVenda,QtdEstoque")] Produto produto)
+        {
+            if (produto.QtdEstoque < 0)
+            {
+                TempData["MensagemErro"] = "Quantidade em Estoque não pode ser menor do que 0";
+                return RedirectToAction("AtualizaProduto");
+            }
+
+            _produtoService.AtualizaProdutoService(produto);
+            TempData["MensagemSucesso"] = "Produto Atualizado com sucesso!";
+            return RedirectToAction("ListarProdutos");
+        }
     }
 }

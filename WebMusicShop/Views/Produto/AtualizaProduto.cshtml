@@ -1,0 +1,66 @@
+﻿@model WebMusicShop.Models.Entities.Produto
+
+@{
+    ViewData["Title"] = "AtualizaProduto";
+}
+
+<h1>Atualizar Produto</h1>
+
+@if(TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        @TempData["MensagemErro"]
+         <button class="btn btn-close float-end"></button>
+    </div>
+}
+
+<h4>Produto</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AtualizaProduto">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Id" class="control-label"></label>
+                <input asp-for="Id" class="form-control" disabled />
+                <span asp-validation-for="Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tipo" class="control-label"></label>
+                <input asp-for="Tipo" class="form-control" />
+                <span asp-validation-for="Tipo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Descricao" class="control-label"></label>
+                <input asp-for="Descricao" class="form-control" />
+                <span asp-validation-for="Descricao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecoCusto" class="control-label"></label>
+                <input asp-for="PrecoCusto" class="form-control" />
+                <span asp-validation-for="PrecoCusto" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecoVenda" class="control-label"></label>
+                <input asp-for="PrecoVenda" class="form-control" />
+                <span asp-validation-for="PrecoVenda" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QtdEstoque" class="control-label"></label>
+                <input asp-for="QtdEstoque" class="form-control" />
+                <span asp-validation-for="QtdEstoque" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Atualizar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-success" asp-action="ListarProdutos">Voltar para Lista de Produtos</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
