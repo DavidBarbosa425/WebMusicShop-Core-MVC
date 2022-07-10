@@ -11,6 +11,7 @@ namespace WebMusicShop.Models.Entities
         [Required(ErrorMessage = "O campo nome CPF obrigatório")]
         public string CPF { get; set; }
         [Required(ErrorMessage = "O campo nome Email obrigatório")]
+        [DataType(DataType.EmailAddress, ErrorMessage ="Email inválido")]
         public string Email { get; set; }
         [Required(ErrorMessage = "O campo nome StatusId obrigatório")]
         public int StatusId { get; set; }

@@ -4,10 +4,10 @@
     ViewData["Title"] = "ListarUsuarios";
 }
 
-<h1>ListarUsuarios</h1>
+<h1>Lista de Usuários</h1>
 
 <p>
-    <a asp-action="CadastraUsuario">Cadastrar um Novo usuário</a>
+    <a class="btn btn-success" asp-action="CadastraUsuario">Cadastrar um Novo usuário</a>
 </p>
 <table class="table">
     <thead>
@@ -49,9 +49,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Atualizar", "Edit", new { id = item.Id }, new {@class = "btn btn-primary"}) 
+                @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new {@class = "btn btn-success"}) 
+                @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new {@class = "btn btn-danger"})
             </td>
         </tr>
 }
