@@ -6,5 +6,6 @@ namespace WebMusicShop.Models.Interfaces.IUsuario
     {
         void CadastraUsuarioContext(Usuario usuario);
         List<Usuario> ListarUsuariosContext();
+        void AtualizaUsuarioContext(Usuario usuario);
     }
 }

@@ -49,5 +49,17 @@ namespace WebMusicShop.Models.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public void AtualizaUsuarioService(Usuario usuario)
+        {
+            try
+            {
+                _usuarioRepository.AtualizaUsuarioRepoSitory(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

@@ -43,9 +43,9 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.ActionLink("Atualizar", "Edit", new { id = item.Id }, new {@class = "btn btn-primary"}) 
+                @Html.ActionLink("Atualizar", "AtualizaUsuario", new { id = item.Id }, new {@class = "btn btn-primary"}) 
                 @Html.ActionLink("Detalhes", "BuscaUsuario", new { id = item.Id }, new {@class = "btn btn-success"}) 
-                @Html.ActionLink("Deletar", "Delete", new { id = item.Id }, new {@class = "btn btn-danger"})
+                @Html.ActionLink("Deletar", "DeletaUsuario", new { id = item.Id }, new {@class = "btn btn-danger"})
             </td>
         </tr>
 }

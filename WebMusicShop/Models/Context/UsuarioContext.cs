@@ -13,6 +13,8 @@ namespace WebMusicShop.Models.Context
         {
             _connection = connectionManager.GetConnection();
         }
+
+
         public void CadastraUsuarioContext(Usuario usuario)
         {
             try
@@ -61,6 +63,31 @@ namespace WebMusicShop.Models.Context
                     usuarios.Add(usuario);
                 }
                 return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public void AtualizaUsuarioContext(Usuario usuario)
+        {
+            try
+            {
+                string proc = "SpUpd_Usuario";
+                SqlCommand cmdUpd = new SqlCommand(proc, _connection);
+                cmdUpd.CommandType = CommandType.StoredProcedure;
+
+                _connection.Open();
+                cmdUpd.Parameters.Add("Id", SqlDbType.Int).Value = usuario.Id;
+                cmdUpd.Parameters.Add("Nome", SqlDbType.VarChar).Value = usuario.Nome;
+                cmdUpd.Parameters.Add("CPF", SqlDbType.VarChar).Value = usuario.CPF;
+                cmdUpd.Parameters.Add("Email", SqlDbType.VarChar).Value = usuario.Email;
+                cmdUpd.Parameters.Add("StatusId", SqlDbType.Int).Value = Convert.ToInt32(usuario.Status);
+                cmdUpd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

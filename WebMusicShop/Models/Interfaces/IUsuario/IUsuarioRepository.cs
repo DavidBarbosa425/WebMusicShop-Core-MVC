@@ -6,5 +6,6 @@ namespace WebMusicShop.Models.Interfaces.IUsuario
     {
         void CadastraUsuarioRepository(Usuario usuario);
         List<Usuario> ListarUsuariosRepository();
+        void AtualizaUsuarioRepoSitory(Usuario usuario);
     }
 }

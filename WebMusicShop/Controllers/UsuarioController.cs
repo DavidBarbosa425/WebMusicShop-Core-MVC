@@ -34,6 +34,26 @@ namespace WebMusicShop.Controllers
            Usuario usuario = _usuarioService.BuscaUsuarioService(id);
             return View(usuario);
         }
-        
+
+        public IActionResult AtualizaUsuario(int id)
+        {
+            Usuario usuario = _usuarioService.BuscaUsuarioService(id);
+            return View(usuario);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AtualizaUsuario([Bind("Id,Nome,CPF,Email,Status")]Usuario usuario)
+        {
+            try
+            {
+                _usuarioService.AtualizaUsuarioService(usuario);
+                return RedirectToAction("ListarUsuarios");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }

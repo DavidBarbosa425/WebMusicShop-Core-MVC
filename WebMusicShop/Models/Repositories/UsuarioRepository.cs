@@ -11,6 +11,7 @@ namespace WebMusicShop.Models.Repositories
             _Usuariocontext = Usuariocontext;
         }
 
+
         public void CadastraUsuarioRepository(Usuario usuario)
         {
             _Usuariocontext.CadastraUsuarioContext(usuario);
@@ -20,6 +21,10 @@ namespace WebMusicShop.Models.Repositories
         {
             List<Usuario> usuarios = _Usuariocontext.ListarUsuariosContext();
             return usuarios;
+        }
+        public void AtualizaUsuarioRepoSitory(Usuario usuario)
+        {
+            _Usuariocontext.AtualizaUsuarioContext(usuario);
         }
     }
 }
