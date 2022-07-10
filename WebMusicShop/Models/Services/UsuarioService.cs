@@ -1,0 +1,40 @@
+﻿using WebMusicShop.Models.Entities;
+using WebMusicShop.Models.Interfaces.IUsuario;
+
+namespace WebMusicShop.Models.Services
+{
+    public class UsuarioService : IUsuarioService
+    {
+        private readonly IUsuarioRepository _usuarioRepository;
+        public UsuarioService(IUsuarioRepository usuarioRepository)
+        {
+            _usuarioRepository = usuarioRepository;
+        }
+
+        public void CadastraUsuarioService(Usuario usuario)
+        {
+            try
+            {
+                _usuarioRepository.CadastraUsuarioRepository(usuario);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            
+        }
+
+        public List<Usuario> ListarUsuariosService()
+        {
+            try
+            {
+               List<Usuario> usuarios = _usuarioRepository.ListarUsuariosRepository();
+                return usuarios;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+    }
+}

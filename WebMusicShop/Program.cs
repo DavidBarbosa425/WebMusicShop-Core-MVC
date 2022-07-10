@@ -2,6 +2,7 @@ using WebMusicShop.Models.Context;
 using WebMusicShop.Models.Interfaces;
 using WebMusicShop.Models.Interfaces.ICliente;
 using WebMusicShop.Models.Interfaces.IProduto;
+using WebMusicShop.Models.Interfaces.IUsuario;
 using WebMusicShop.Models.Repositories;
 using WebMusicShop.Models.Services;
 
@@ -15,6 +16,10 @@ builder.Services.AddScoped<IConnectionManager,ConnectionManager>();
 builder.Services.AddScoped<IProdutoContext, ProdutoContext>();
 builder.Services.AddScoped<IProdutoRepository, ProdutoRepository>();
 builder.Services.AddScoped<IProdutoService, ProdutoService>();
+//Usuario
+builder.Services.AddScoped<IUsuarioContext, UsuarioContext>();
+builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
