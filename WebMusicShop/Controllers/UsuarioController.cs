@@ -28,6 +28,12 @@ namespace WebMusicShop.Controllers
             List<Usuario> usuarios =_usuarioService.ListarUsuariosService();
             return View(usuarios);
         }
+
+        public IActionResult BuscaUsuario(int id)
+        {
+           Usuario usuario = _usuarioService.BuscaUsuarioService(id);
+            return View(usuario);
+        }
         
     }
 }

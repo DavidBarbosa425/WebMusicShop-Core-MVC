@@ -36,5 +36,18 @@ namespace WebMusicShop.Models.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public Usuario BuscaUsuarioService(int id)
+        {
+            try
+            {
+               Usuario? usuario =  _usuarioRepository.ListarUsuariosRepository().FirstOrDefault(x => x.Id == id);
+                return usuario;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

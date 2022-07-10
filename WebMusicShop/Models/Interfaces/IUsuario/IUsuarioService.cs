@@ -6,5 +6,6 @@ namespace WebMusicShop.Models.Interfaces.IUsuario
     {
         void CadastraUsuarioService(Usuario usuario);
         List<Usuario> ListarUsuariosService();
+        Usuario BuscaUsuarioService(int id);
     }
 }
