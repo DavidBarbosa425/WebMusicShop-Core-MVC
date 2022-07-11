@@ -98,5 +98,27 @@ namespace WebMusicShop.Models.Context
                 _connection.Close();
             }
         }
+
+        public void DeletaUsuarioContext(int id)
+        {
+            try
+            {
+                string proc = "SpDel_Usuario";
+                SqlCommand cmdDel = new SqlCommand(proc, _connection);
+                cmdDel.CommandType = CommandType.StoredProcedure;
+                _connection.Open();
+
+                cmdDel.Parameters.Add("Id", SqlDbType.Int).Value = id;
+                cmdDel.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
     }
 }

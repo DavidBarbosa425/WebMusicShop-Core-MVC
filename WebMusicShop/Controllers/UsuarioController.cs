@@ -55,5 +55,25 @@ namespace WebMusicShop.Controllers
             }
         }
 
+        public IActionResult DeletaUsuario(int id)
+        {
+            Usuario usuario = _usuarioService.BuscaUsuarioService(id);
+            return View(usuario);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletaUsuario([Bind("Id")]Usuario usuario)
+        {
+            try
+            {
+                _usuarioService.DeletaUsuarioService(usuario.Id);
+                return RedirectToAction("ListarUsuarios");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
     }
 }
