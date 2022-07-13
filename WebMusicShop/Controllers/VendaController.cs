@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebMusicShop.Models.Entities;
 using WebMusicShop.Models.Interfaces.IVenda;
 
 namespace WebMusicShop.Controllers
@@ -15,6 +16,13 @@ namespace WebMusicShop.Controllers
         public IActionResult CadastraVenda()
         {
             return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CadastraVenda([Bind("ProdutoId,ClienteId,UsuarioId,Quantidade")] Venda venda)
+        {
+            _vendaService.CadastraVendaService(venda);
+            return RedirectToAction("ListarVendas");
         }
     }
 }
