@@ -5,5 +5,6 @@ namespace WebMusicShop.Models.Interfaces.IVenda
     public interface IVendaService
     {
         void CadastraVendaService(Venda venda);
+        List<Venda> ListarVendasService();
     }
 }

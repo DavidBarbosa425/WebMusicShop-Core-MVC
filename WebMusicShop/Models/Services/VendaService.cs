@@ -22,5 +22,18 @@ namespace WebMusicShop.Models.Services
                 throw new Exception(ex.Message);
             }
         }
+
+        public List<Venda> ListarVendasService()
+        {
+            try
+            {
+                List<Venda> vendas = _vendaRepository.ListarVendasRepository();
+                return vendas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

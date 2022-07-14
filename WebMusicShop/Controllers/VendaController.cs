@@ -24,5 +24,11 @@ namespace WebMusicShop.Controllers
             _vendaService.CadastraVendaService(venda);
             return RedirectToAction("ListarVendas");
         }
+
+        public IActionResult ListarVendas()
+        {
+            List<Venda> vendas = _vendaService.ListarVendasService();
+            return View(vendas);
+        }
     }
 }

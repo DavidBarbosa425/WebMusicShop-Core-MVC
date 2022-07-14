@@ -1,0 +1,65 @@
+﻿@model IEnumerable<WebMusicShop.Models.Entities.Venda>
+
+@{
+    ViewData["Title"] = "ListarVendas";
+}
+
+<h1>Lista de Vendas</h1>
+
+<p>
+    <a class="btn btn-success" asp-action="CadastraVenda">Cadastrar uma nova venda</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Produto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cliente)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Produto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.ActionLink("Atualizar", "AtualizaVenda", new { id = item.Id }, new {@class = "btn btn-primary"}) 
+                @Html.ActionLink("Detalhes", "BuscaVenda", new { id = item.Id }, new {@class = "btn btn-success"}) 
+                @Html.ActionLink("Deletar", "DeletaVenda", new { id = item.Id }, new {@class = "btn btn-danger"})
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

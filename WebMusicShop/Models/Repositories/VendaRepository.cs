@@ -13,7 +13,13 @@ namespace WebMusicShop.Models.Repositories
 
         public void CadastraVendaRepository(Venda venda)
         {
-            _vendaContext.CadastraVendaContext(venda);
+            _vendaContext.CadastraVendaContext(venda);            
+        }
+
+        public List<Venda> ListarVendasRepository()
+        {
+            List<Venda> vendas = _vendaContext.ListarVendasContext();
+            return vendas;
         }
     }
 }
