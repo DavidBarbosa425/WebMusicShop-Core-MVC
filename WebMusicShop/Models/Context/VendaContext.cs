@@ -14,6 +14,8 @@ namespace WebMusicShop.Models.Context
         {
             _connection = connectionManager.GetConnection();
         }
+
+
         public void CadastraVendaContext(Venda venda)
         {
             try
@@ -65,10 +67,36 @@ namespace WebMusicShop.Models.Context
                     venda.Usuario = dataReader.GetString("nomeUsuario");
                     venda.DataVenda = dataReader.IsDBNull("DataVenda") ? null : dataReader.GetDateTime("DataVenda");
                     venda.Quantidade = dataReader.GetInt32("Quantidade");
+                    venda.PrecoVenda = dataReader.GetDecimal("PrecoProduto").ToString("C");
+                    venda.TotalVenda = dataReader.GetDecimal("totalVenda").ToString("C");
                     venda.DataAlteracao = dataReader.IsDBNull("DataAlteracao") ? null : dataReader.GetDateTime("DataAlteracao");
                     Vendas.Add(venda);
                 }
                 return Vendas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        public void AtualizaVendaContext(Venda venda)
+        {
+            try
+            {
+                string proc = "SpUpd_Venda";
+                SqlCommand cmdUpd = new SqlCommand(proc, _connection);
+                cmdUpd.CommandType = CommandType.StoredProcedure;
+
+                _connection.Open();
+                cmdUpd.Parameters.Add("Id", SqlDbType.Int).Value = venda.Id;
+                cmdUpd.Parameters.Add("ProdutoId", SqlDbType.Int).Value = venda.ProdutoId;
+                cmdUpd.Parameters.Add("ClienteId", SqlDbType.Int).Value = venda.ClienteId;
+                cmdUpd.Parameters.Add("QtdEstoque", SqlDbType.Int).Value = venda.Quantidade;
+                cmdUpd.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

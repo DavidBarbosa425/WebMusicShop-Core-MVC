@@ -6,5 +6,7 @@ namespace WebMusicShop.Models.Interfaces.IVenda
     {
         void CadastraVendaService(Venda venda);
         List<Venda> ListarVendasService();
+        Venda BuscaVendaService(int id);
+        void AtualizaVendaService(Venda venda);
     }
 }

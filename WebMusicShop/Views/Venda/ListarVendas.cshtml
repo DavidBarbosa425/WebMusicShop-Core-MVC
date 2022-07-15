@@ -30,6 +30,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Quantidade)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecoVenda)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalVenda)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -53,6 +59,12 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecoVenda)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalVenda)
             </td>
             <td>
                 @Html.ActionLink("Atualizar", "AtualizaVenda", new { id = item.Id }, new {@class = "btn btn-primary"}) 

@@ -19,6 +19,10 @@ namespace WebMusicShop.Models.Entities
         public DateTime? DataVenda { get; set; }
         [Required(ErrorMessage = "Campo Quantidade é obrigatório")]
         public int Quantidade { get; set; }
+        [Display(Name = "Preço Produto")]
+        public string PrecoVenda { get; set; }
+        [Display(Name = "Total Venda")]
+        public string TotalVenda { get; set; }
         [Display(Name = "Data de Alteração da Venda")]
         [DataType(DataType.Date)]
         public DateTime? DataAlteracao { get; set; }

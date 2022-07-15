@@ -30,5 +30,24 @@ namespace WebMusicShop.Controllers
             List<Venda> vendas = _vendaService.ListarVendasService();
             return View(vendas);
         }
+        public IActionResult BuscaVenda(int id)
+        {
+           Venda venda = _vendaService.BuscaVendaService(id);
+            return View(venda);
+        }
+
+        public IActionResult AtualizaVenda(int id)
+        {
+            Venda venda = _vendaService.BuscaVendaService(id);
+            return View(venda);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AtualizaVenda([Bind("Id,ProdutoId,ClienteId,UsuarioId,Quantidade")] Venda venda)
+        {
+            _vendaService.AtualizaVendaService(venda);
+            return RedirectToAction("ListarVendas");
+        }
     }
 }

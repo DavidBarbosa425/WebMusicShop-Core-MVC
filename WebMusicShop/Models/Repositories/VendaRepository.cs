@@ -6,6 +6,7 @@ namespace WebMusicShop.Models.Repositories
     public class VendaRepository : IVendaRepository
     {
         private readonly IVendaContext _vendaContext;
+
         public VendaRepository(IVendaContext vendaContext)
         {
             _vendaContext = vendaContext;
@@ -20,6 +21,10 @@ namespace WebMusicShop.Models.Repositories
         {
             List<Venda> vendas = _vendaContext.ListarVendasContext();
             return vendas;
+        }
+        public void AtualizaVendaRepository(Venda venda)
+        {
+            _vendaContext.AtualizaVendaContext(venda);
         }
     }
 }

@@ -11,6 +11,7 @@ namespace WebMusicShop.Models.Services
             _vendaRepository = vendaRepository;
         }
 
+
         public void CadastraVendaService(Venda venda)
         {
             try
@@ -34,6 +35,16 @@ namespace WebMusicShop.Models.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public Venda BuscaVendaService(int id)
+        {
+            Venda? venda =_vendaRepository.ListarVendasRepository().Find(x => x.Id == id);
+            return venda;
+        }
+        public void AtualizaVendaService(Venda venda)
+        {
+            _vendaRepository.AtualizaVendaRepository(venda);
         }
     }
 }
