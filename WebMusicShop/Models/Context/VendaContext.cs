@@ -95,8 +95,31 @@ namespace WebMusicShop.Models.Context
                 cmdUpd.Parameters.Add("Id", SqlDbType.Int).Value = venda.Id;
                 cmdUpd.Parameters.Add("ProdutoId", SqlDbType.Int).Value = venda.ProdutoId;
                 cmdUpd.Parameters.Add("ClienteId", SqlDbType.Int).Value = venda.ClienteId;
-                cmdUpd.Parameters.Add("QtdEstoque", SqlDbType.Int).Value = venda.Quantidade;
+                cmdUpd.Parameters.Add("UsuarioId", SqlDbType.Int).Value = venda.UsuarioId;
+                cmdUpd.Parameters.Add("Quantidade", SqlDbType.Int).Value = venda.Quantidade;
                 cmdUpd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+
+        public void DeletaVendaContext(int id)
+        {
+            try
+            {
+                string proc = "SpDel_Venda";
+                SqlCommand cmdUp = new SqlCommand(proc, _connection);
+                cmdUp.CommandType = CommandType.StoredProcedure;
+
+                _connection.Open();
+                cmdUp.Parameters.Add("Id", SqlDbType.Int).Value = id;
+                cmdUp.ExecuteNonQuery();
             }
             catch (Exception ex)
             {

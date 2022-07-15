@@ -8,5 +8,6 @@ namespace WebMusicShop.Models.Interfaces.IVenda
         List<Venda> ListarVendasService();
         Venda BuscaVendaService(int id);
         void AtualizaVendaService(Venda venda);
+        void DeletaVendaService(int id);
     }
 }

@@ -46,5 +46,16 @@ namespace WebMusicShop.Models.Services
         {
             _vendaRepository.AtualizaVendaRepository(venda);
         }
+        public void DeletaVendaService(int id)
+        {
+            try
+            {
+                _vendaRepository.DeletaVendaRepository(id);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

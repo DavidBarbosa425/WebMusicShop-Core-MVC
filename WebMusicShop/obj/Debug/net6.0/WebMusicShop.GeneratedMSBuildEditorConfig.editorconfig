@@ -103,6 +103,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcQ2FkYXN0cmFWZW5kYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/DAVID/Documents/Estudos/WebMusicShop/WebMusicShop/Views/Venda/DeletaVenda.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcRGVsZXRhVmVuZGEuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/DAVID/Documents/Estudos/WebMusicShop/WebMusicShop/Views/Venda/ListarVendas.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGFcTGlzdGFyVmVuZGFzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

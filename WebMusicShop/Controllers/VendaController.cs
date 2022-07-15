@@ -49,5 +49,32 @@ namespace WebMusicShop.Controllers
             _vendaService.AtualizaVendaService(venda);
             return RedirectToAction("ListarVendas");
         }
+
+        public IActionResult DeletaVenda(int id)
+        {
+            try
+            {
+                Venda venda = _vendaService.BuscaVendaService(id);
+                return View(venda);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletaVenda([Bind("Id")] Venda venda)
+        {
+            try
+            {
+                _vendaService.DeletaVendaService(venda.Id);
+                return RedirectToAction("ListarVendas");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

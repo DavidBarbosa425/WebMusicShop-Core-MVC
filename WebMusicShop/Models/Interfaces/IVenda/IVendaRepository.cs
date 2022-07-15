@@ -7,5 +7,6 @@ namespace WebMusicShop.Models.Interfaces.IVenda
         void CadastraVendaRepository(Venda venda);
         List<Venda> ListarVendasRepository();
         void AtualizaVendaRepository(Venda venda);
+        void DeletaVendaRepository(int id);
     }
 }

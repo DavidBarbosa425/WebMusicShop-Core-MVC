@@ -7,5 +7,6 @@ namespace WebMusicShop.Models.Interfaces.IVenda
         void CadastraVendaContext(Venda venda);
         List<Venda> ListarVendasContext();
         void AtualizaVendaContext(Venda venda);
+        void DeletaVendaContext(int id);
     }
 }
