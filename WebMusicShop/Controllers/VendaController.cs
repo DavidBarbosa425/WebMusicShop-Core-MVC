@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebMusicShop.Models.Entities;
+using WebMusicShop.Models.Interfaces.IProduto;
 using WebMusicShop.Models.Interfaces.IVenda;
 
 namespace WebMusicShop.Controllers
@@ -7,10 +8,12 @@ namespace WebMusicShop.Controllers
     public class VendaController : Controller
     {
         private readonly IVendaService _vendaService;
+        public readonly IProdutoService _produtoService;
 
-        public VendaController(IVendaService vendaService)
+        public VendaController(IVendaService vendaService, IProdutoService produtoService)
         {
             _vendaService = vendaService;
+            _produtoService = produtoService;
         }
 
         public IActionResult CadastraVenda()
@@ -23,7 +26,16 @@ namespace WebMusicShop.Controllers
         {
             try
             {
+                Produto produto = _produtoService.BuscaProdutoService(venda.ProdutoId);
+
+                if (produto.QtdEstoque < venda.Quantidade || produto.QtdEstoque == 0)
+                {
+                    TempData["MensagemErro"] = "Quantidade em Estoque Insuficiente";
+                    return RedirectToAction("ListarVendas");
+                }
+
                 _vendaService.CadastraVendaService(venda);
+                TempData["MensagemSucesso"] = "Venda Cadastrada com Sucesso!";
                 return RedirectToAction("ListarVendas");
             }
             catch (Exception ex)
@@ -81,7 +93,37 @@ namespace WebMusicShop.Controllers
         {
             try
             {
+                Produto produto = _produtoService.BuscaProdutoService(venda.ProdutoId);
+                Venda ultimaVenda = _vendaService.BuscaVendaService(venda.Id);
+                var qtdVendaAtualizar = 0;
+
+                if (ultimaVenda.Quantidade < venda.Quantidade)
+                {
+                    qtdVendaAtualizar = venda.Quantidade - ultimaVenda.Quantidade;
+                    produto.QtdEstoque = produto.QtdEstoque - qtdVendaAtualizar;
+                    
+                }
+
+                if (ultimaVenda.Quantidade > venda.Quantidade)
+                {
+                    qtdVendaAtualizar = ultimaVenda.Quantidade - venda.Quantidade;
+                    produto.QtdEstoque = produto.QtdEstoque + qtdVendaAtualizar;
+                }
+
+                if (produto.QtdEstoque < 0)
+                {
+                    TempData["MensagemErro"] = "Quantidade em Estoque Insuficiente";
+                    return RedirectToAction("ListarVendas");
+                }
+                if (venda.Quantidade == 0)
+                {
+                    TempData["MensagemErro"] = "Insira a Quantidade de Produtos";
+                    return RedirectToAction("ListarVendas");
+                }
+
+                _produtoService.AtualizaProdutoService(produto);
                 _vendaService.AtualizaVendaService(venda);
+                TempData["MensagemSucesso"] = "Venda Atualizada com Sucesso!";
                 return RedirectToAction("ListarVendas");
             }
             catch (Exception ex)
@@ -111,6 +153,7 @@ namespace WebMusicShop.Controllers
             try
             {
                 _vendaService.DeletaVendaService(venda.Id);
+                TempData["MensagemSucesso"] = "Venda Deletada com Sucesso!";
                 return RedirectToAction("ListarVendas");
             }
             catch (Exception ex)
