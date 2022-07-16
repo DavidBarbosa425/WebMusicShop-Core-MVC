@@ -34,6 +34,12 @@ namespace WebMusicShop.Controllers
                     return RedirectToAction("ListarVendas");
                 }
 
+                if (venda.Quantidade <= 0)
+                {
+                    TempData["MensagemErro"] = "Insira a Quantidade de Produtos";
+                    return RedirectToAction("ListarVendas");
+                }
+
                 _vendaService.CadastraVendaService(venda);
                 TempData["MensagemSucesso"] = "Venda Cadastrada com Sucesso!";
                 return RedirectToAction("ListarVendas");
@@ -100,14 +106,14 @@ namespace WebMusicShop.Controllers
                 if (ultimaVenda.Quantidade < venda.Quantidade)
                 {
                     qtdVendaAtualizar = venda.Quantidade - ultimaVenda.Quantidade;
-                    produto.QtdEstoque = produto.QtdEstoque - qtdVendaAtualizar;
+                    produto.QtdEstoque -= qtdVendaAtualizar;
                     
                 }
 
                 if (ultimaVenda.Quantidade > venda.Quantidade)
                 {
                     qtdVendaAtualizar = ultimaVenda.Quantidade - venda.Quantidade;
-                    produto.QtdEstoque = produto.QtdEstoque + qtdVendaAtualizar;
+                    produto.QtdEstoque += qtdVendaAtualizar;
                 }
 
                 if (produto.QtdEstoque < 0)
