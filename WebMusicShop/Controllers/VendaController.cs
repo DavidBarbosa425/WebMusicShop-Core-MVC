@@ -21,33 +21,74 @@ namespace WebMusicShop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CadastraVenda([Bind("ProdutoId,ClienteId,UsuarioId,Quantidade")] Venda venda)
         {
-            _vendaService.CadastraVendaService(venda);
-            return RedirectToAction("ListarVendas");
+            try
+            {
+                _vendaService.CadastraVendaService(venda);
+                return RedirectToAction("ListarVendas");
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarVendas");
+            }
         }
 
         public IActionResult ListarVendas()
         {
-            List<Venda> vendas = _vendaService.ListarVendasService();
-            return View(vendas);
+
+            try
+            {
+                List<Venda> vendas = _vendaService.ListarVendasService();
+                return View(vendas);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarVendas");
+            }
         }
         public IActionResult BuscaVenda(int id)
         {
-           Venda venda = _vendaService.BuscaVendaService(id);
-            return View(venda);
+            try
+            {
+                Venda venda = _vendaService.BuscaVendaService(id);
+                return View(venda);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarVendas");
+            }
         }
 
         public IActionResult AtualizaVenda(int id)
         {
-            Venda venda = _vendaService.BuscaVendaService(id);
-            return View(venda);
+            try
+            {
+                Venda venda = _vendaService.BuscaVendaService(id);
+                return View(venda);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarVendas");
+            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult AtualizaVenda([Bind("Id,ProdutoId,ClienteId,UsuarioId,Quantidade")] Venda venda)
         {
-            _vendaService.AtualizaVendaService(venda);
-            return RedirectToAction("ListarVendas");
+            try
+            {
+                _vendaService.AtualizaVendaService(venda);
+                return RedirectToAction("ListarVendas");
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarVendas");
+            }
         }
 
         public IActionResult DeletaVenda(int id)
@@ -59,7 +100,8 @@ namespace WebMusicShop.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarVendas");
             }
         }
         [HttpPost]
@@ -73,7 +115,8 @@ namespace WebMusicShop.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarVendas");
             }
         }
     }

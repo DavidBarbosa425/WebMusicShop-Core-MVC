@@ -39,12 +39,26 @@ namespace WebMusicShop.Models.Services
 
         public Venda BuscaVendaService(int id)
         {
-            Venda? venda =_vendaRepository.ListarVendasRepository().Find(x => x.Id == id);
-            return venda;
+            try
+            {
+                Venda? venda = _vendaRepository.ListarVendasRepository().Find(x => x.Id == id);
+                return venda;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public void AtualizaVendaService(Venda venda)
         {
-            _vendaRepository.AtualizaVendaRepository(venda);
+            try
+            {
+                _vendaRepository.AtualizaVendaRepository(venda);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
         public void DeletaVendaService(int id)
         {

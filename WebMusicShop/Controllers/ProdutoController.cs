@@ -38,20 +38,44 @@ namespace WebMusicShop.Controllers
 
         public IActionResult ListarProdutos()
         {
-            List<Produto> produtos = _produtoService.ListarProdutosService();
-            return View(produtos);
+            try
+            {
+                List<Produto> produtos = _produtoService.ListarProdutosService();
+                return View(produtos);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarProdutos");
+            }
         }
 
         public IActionResult BuscaProduto(int id)
         {
-           Produto produto = _produtoService.BuscaProdutoService(id);
-            return View(produto);
+            try
+            {
+                Produto produto = _produtoService.BuscaProdutoService(id);
+                return View(produto);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarProdutos");
+            }
         }
 
         public IActionResult AtualizaProduto(int id)
         {
-            Produto produto = _produtoService.BuscaProdutoService(id);
-            return View(produto);
+            try
+            {
+                Produto produto = _produtoService.BuscaProdutoService(id);
+                return View(produto);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarProdutos");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -78,8 +102,16 @@ namespace WebMusicShop.Controllers
 
         public IActionResult DeletaProduto(int id)
         {
-            Produto produto = _produtoService.BuscaProdutoService(id);
-            return View(produto);
+            try
+            {
+                Produto produto = _produtoService.BuscaProdutoService(id);
+                return View(produto);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarProdutos");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]

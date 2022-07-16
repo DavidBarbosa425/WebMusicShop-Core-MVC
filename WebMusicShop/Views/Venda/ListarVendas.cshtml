@@ -6,6 +6,21 @@
 
 <h1>Lista de Vendas</h1>
 
+@if(TempData["MensagemSucesso"] != null)
+{
+    <div class="alert alert-success text-center" role="alert">
+        @TempData["MensagemSucesso"]
+        <button class="btn btn-close float-end"></button>
+    </div>
+}
+@if(TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        @TempData["MensagemErro"]
+         <button class="btn btn-close float-end"></button>
+    </div>
+}
+
 <p>
     <a class="btn btn-success" asp-action="CadastraVenda">Cadastrar uma nova venda</a>
 </p>

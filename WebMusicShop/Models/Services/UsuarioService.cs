@@ -70,7 +70,7 @@ namespace WebMusicShop.Models.Services
             }
             catch (Exception ex)
             {
-
+                throw new Exception(ex.Message);
             }
         }
     }

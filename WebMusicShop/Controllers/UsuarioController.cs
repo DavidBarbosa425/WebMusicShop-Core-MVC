@@ -20,25 +20,57 @@ namespace WebMusicShop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CadastraUsuario([Bind("Nome,CPF,Email,Status")] Usuario usuario)
         {
-            _usuarioService.CadastraUsuarioService(usuario);
-            return RedirectToAction("ListarUsuarios");
+            try
+            {
+                _usuarioService.CadastraUsuarioService(usuario);
+                return RedirectToAction("ListarUsuarios");
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarUsuarios");
+            }
         }
         public IActionResult ListarUsuarios()
         {
-            List<Usuario> usuarios =_usuarioService.ListarUsuariosService();
-            return View(usuarios);
+            try
+            {
+                List<Usuario> usuarios = _usuarioService.ListarUsuariosService();
+                return View(usuarios);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarUsuarios");
+            }
         }
 
         public IActionResult BuscaUsuario(int id)
         {
-           Usuario usuario = _usuarioService.BuscaUsuarioService(id);
-            return View(usuario);
+            try
+            {
+                Usuario usuario = _usuarioService.BuscaUsuarioService(id);
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarUsuarios");
+            }
         }
 
         public IActionResult AtualizaUsuario(int id)
         {
-            Usuario usuario = _usuarioService.BuscaUsuarioService(id);
-            return View(usuario);
+            try
+            {
+                Usuario usuario = _usuarioService.BuscaUsuarioService(id);
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarUsuarios");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -51,14 +83,23 @@ namespace WebMusicShop.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarUsuarios");
             }
         }
 
         public IActionResult DeletaUsuario(int id)
         {
-            Usuario usuario = _usuarioService.BuscaUsuarioService(id);
-            return View(usuario);
+            try
+            {
+                Usuario usuario = _usuarioService.BuscaUsuarioService(id);
+                return View(usuario);
+            }
+            catch (Exception ex)
+            {
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarUsuarios");
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -71,7 +112,8 @@ namespace WebMusicShop.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                TempData["MensagemErro"] = ex.Message;
+                return RedirectToAction("ListarUsuarios");
             }
         }
 
