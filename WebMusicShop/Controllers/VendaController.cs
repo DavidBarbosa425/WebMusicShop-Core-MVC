@@ -22,8 +22,16 @@ namespace WebMusicShop.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CadastraVenda([Bind("ProdutoId,ClienteId,UsuarioId,Quantidade")] Venda venda)
+        public IActionResult CadastraVenda([Bind("Produto,Cliente,Usuario,Quantidade")] Venda venda)
         {
+            string[] p = venda.Produto.Split(" - ");
+            string[] c = venda.Cliente.Split(" - ");
+            string[] u = venda.Usuario.Split(" - ");
+
+            venda.ProdutoId = int.Parse(p[0]);
+            venda.ClienteId = int.Parse(c[0]);
+            venda.UsuarioId = int.Parse(u[0]);
+
             try
             {
                 Produto produto = _produtoService.BuscaProdutoService(venda.ProdutoId);
