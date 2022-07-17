@@ -92,7 +92,14 @@ namespace WebMusicShop.Controllers
             try
             {
                 Venda venda = _vendaService.BuscaVendaService(id);
-                return View(venda);
+                Venda? vendaIdNome = _vendaService.ListarVendasService().Find(x => x.Id == venda.Id);
+                vendaIdNome.Produto = venda.ProdutoId.ToString() + " - " + vendaIdNome.Produto.ToString();
+                vendaIdNome.Cliente = venda.ClienteId.ToString() + " - " + vendaIdNome.Cliente.ToString();
+                vendaIdNome.Usuario = venda.UsuarioId.ToString() + " - " + vendaIdNome.Usuario.ToString();
+                vendaIdNome.Quantidade = venda.Quantidade;
+
+
+                return View(vendaIdNome);
             }
             catch (Exception ex)
             {
@@ -103,8 +110,16 @@ namespace WebMusicShop.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AtualizaVenda([Bind("Id,ProdutoId,ClienteId,UsuarioId,Quantidade")] Venda venda)
+        public IActionResult AtualizaVenda([Bind("Id,Produto,Cliente,Usuario,Quantidade")] Venda venda)
         {
+            string[] p = venda.Produto.Split(" - ");
+            string[] c = venda.Cliente.Split(" - ");
+            string[] u = venda.Usuario.Split(" - ");
+
+            venda.ProdutoId = int.Parse(p[0]);
+            venda.ClienteId = int.Parse(c[0]);
+            venda.UsuarioId = int.Parse(u[0]);
+
             try
             {
                 Produto produto = _produtoService.BuscaProdutoService(venda.ProdutoId);
