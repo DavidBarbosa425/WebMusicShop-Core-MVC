@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebMusicShop.Models.Entities;
+using WebMusicShop.Models.Interfaces.ICliente;
 using WebMusicShop.Models.Interfaces.IProduto;
+using WebMusicShop.Models.Interfaces.IUsuario;
 using WebMusicShop.Models.Interfaces.IVenda;
 
 namespace WebMusicShop.Controllers
@@ -9,11 +11,15 @@ namespace WebMusicShop.Controllers
     {
         private readonly IVendaService _vendaService;
         public readonly IProdutoService _produtoService;
+        public readonly IClienteService _clienteService;
+        public readonly IUsuarioService _usuarioService;
 
-        public VendaController(IVendaService vendaService, IProdutoService produtoService)
+        public VendaController(IVendaService vendaService, IProdutoService produtoService, IClienteService clienteService, IUsuarioService usuarioService)
         {
             _vendaService = vendaService;
             _produtoService = produtoService;
+            _clienteService = clienteService;
+            _usuarioService = usuarioService;
         }
 
         public IActionResult CadastraVenda()
@@ -34,6 +40,22 @@ namespace WebMusicShop.Controllers
 
             try
             {
+                Cliente cliente = _clienteService.BuscaCliente(venda.ClienteId);
+
+                if (cliente.Status.Equals("Inativo") || cliente.Status.Equals("Bloqueado"))
+                {
+                    TempData["MensagemErro"] = "Venda não pode ser efetuada, cliente esta inativo ou bloqueado";
+                    return RedirectToAction("ListarVendas");
+                }
+
+                Usuario usuario = _usuarioService.BuscaUsuarioService(venda.UsuarioId);
+
+                if (usuario.Status.Equals("Inativo") || usuario.Status.Equals("Bloqueado"))
+                {
+                    TempData["MensagemErro"] = "Venda não pode ser efetuada, usuário esta inativo ou bloqueado";
+                    return RedirectToAction("ListarVendas");
+                }
+
                 Produto produto = _produtoService.BuscaProdutoService(venda.ProdutoId);
 
                 if (produto.QtdEstoque < venda.Quantidade || produto.QtdEstoque == 0)
