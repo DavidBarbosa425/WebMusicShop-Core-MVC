@@ -123,5 +123,20 @@ namespace WebMusicShop.Controllers
             }
 
         }
+
+        public IActionResult PesquisarClientes(string term)
+        {
+            List<string> filtro = new List<string>();
+            var clientes = _clienteService.ListarClientesService().Select(x => new { Id = x.Id, Nome = x.Nome });
+
+            foreach (var cliente in clientes)
+            {
+                string clienteConcat  = cliente.Id.ToString() + " - " + cliente.Nome.ToString();
+                filtro.Add(clienteConcat);
+            }
+
+            var filtrarClientes = filtro.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase));
+            return Json(filtrarClientes);
+        }
     }
 }

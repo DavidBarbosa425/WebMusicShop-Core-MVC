@@ -130,5 +130,19 @@ namespace WebMusicShop.Controllers
             }
 
         }
+        public IActionResult PesquisarProdutos(string term)
+        {
+            List<string> filtro = new List<string>();
+            var produtos = _produtoService.ListarProdutosService().Select(x => new { Id = x.Id, Tipo = x.Tipo });
+
+            foreach (var produto in produtos)
+            {
+                string produtoConcat = produto.Id.ToString() + " - " + produto.Tipo.ToString();
+                filtro.Add(produtoConcat);
+            }
+
+            var filtrarProdutos = filtro.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase));
+            return Json(filtrarProdutos);
+        }
     }
 }

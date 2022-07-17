@@ -117,5 +117,20 @@ namespace WebMusicShop.Controllers
             }
         }
 
+        public IActionResult PesquisarUsuarios(string term)
+        {
+            List<string> filtro = new List<string>();
+            var usuarios = _usuarioService.ListarUsuariosService().Select(x => new { Id = x.Id, Nome = x.Nome });
+
+            foreach (var usuario in usuarios)
+            {
+                string usuarioConcat = usuario.Id.ToString() + " - " + usuario.Nome.ToString();
+                filtro.Add(usuarioConcat);
+            }
+
+            var filtrarUsuarios = filtro.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase));
+            return Json(filtrarUsuarios);
+        }
+
     }
 }

@@ -13,18 +13,18 @@
         <form asp-action="CadastraVenda">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="ProdutoId" class="control-label"></label>
-                <input asp-for="ProdutoId" class="form-control" />
+                <label asp-for="Produto" class="control-label"></label>
+                <input asp-for="Produto" class="form-control" id="produto"/>
                 <span asp-validation-for="ProdutoId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ClienteId" class="control-label"></label>
-                <input asp-for="ClienteId" class="form-control" />
+                <label asp-for="Cliente" class="control-label"></label>
+                <input asp-for="Cliente" class="form-control" id="cliente" />
                 <span asp-validation-for="ClienteId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <input asp-for="UsuarioId" class="form-control" />
+                <label asp-for="Usuario" class="control-label"></label>
+                <input asp-for="Usuario" class="form-control" id="usuario"/>
                 <span asp-validation-for="UsuarioId" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,4 +45,25 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+         $("#produto").autocomplete({
+             source: '@Url.Action("PesquisarProdutos","Produto")',
+             minlength : 1
+         });
+    </script>
+
+        <script>
+         $("#cliente").autocomplete({
+             source: '@Url.Action("PesquisarClientes","Cliente")',
+             minlength : 1
+         });
+    </script>
+
+        <script>
+         $("#usuario").autocomplete({
+             source: '@Url.Action("PesquisarUsuarios","Usuario")',
+             minlength : 1
+         });
+    </script>
 }
