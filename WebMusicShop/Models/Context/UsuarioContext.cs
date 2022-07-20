@@ -59,6 +59,7 @@ namespace WebMusicShop.Models.Context
                     usuario.Nome = dataReader.GetString("Nome");
                     usuario.CPF = dataReader.GetString("CPF");
                     usuario.Email = dataReader.GetString("Email");
+                    usuario.Senha = dataReader.GetString("Senha");
                     usuario.Status = dataReader.GetString("Status");
                     usuarios.Add(usuario);
                 }

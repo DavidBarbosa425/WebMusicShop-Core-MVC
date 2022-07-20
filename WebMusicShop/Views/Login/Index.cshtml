@@ -1,0 +1,35 @@
+﻿@using WebMusicShop.Models.Entities
+@model Login
+@{
+    Layout = "_LayoutDeslogada";
+}
+<h1 >Login</h1>
+
+@if(TempData["MensagemErro"] != null)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        @TempData["MensagemErro"]
+         <button class="btn btn-close float-end"></button>
+    </div>
+}
+
+<form asp-controller="Login" asp-action="Entrar" method="post" class="col-4">
+  <div class="mb-3 row">
+    <label for="email" class="form-label">E-mail</label>
+    <input type="text" asp-for="Email" class="form-control" id="email">
+     <span asp-validation-for="Email" class="text-danger"></span>
+  </div>
+  <div class="mb-3 row">
+    <label for="senha" class="form-label">Senha</label>
+    <input type="password" asp-for="Senha" class="form-control" id="senha">
+     <span asp-validation-for="Senha" class="text-danger"></span>
+  </div>
+  <div class="d-grid gap-2 row">
+    <button class="btn btn-success" type="submit">Entrar</button>
+  </div>
+</form>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+  
