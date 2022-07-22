@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebMusicShop.Helper;
 using WebMusicShop.Models.Entities;
 using WebMusicShop.Models.Interfaces.IUsuario;
 
@@ -7,15 +8,20 @@ namespace WebMusicShop.Controllers
     public class LoginController : Controller
     {
         private readonly IUsuarioService _usuarioService;
-        public LoginController(IUsuarioService usuarioService)
+        private readonly ISessao _sessao;
+        public LoginController(IUsuarioService usuarioService, ISessao sessao)
         {
             _usuarioService = usuarioService;
+            _sessao = sessao;
         }
 
         public IActionResult Index()
         {
+            // Se usuario estiver logado, redirecionar para a home
+            if(_sessao.BuscaSessaoUsuario() != null) return RedirectToAction("Index","Home");
             return View();
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Entrar(Login login)
@@ -29,6 +35,7 @@ namespace WebMusicShop.Controllers
                 {
                     if (usuario.SenhaValida(login.Senha))
                     {
+                        _sessao.CriaSessaoUsuario(usuario);
                         return RedirectToAction("Index", "Home");
                     }
                     
@@ -36,6 +43,12 @@ namespace WebMusicShop.Controllers
                 TempData["MensagemErro"] = "E-mail ou senha são inválidos, por favor, tente novamente";
             }
             return View("Index");
+        }
+
+        public IActionResult Sair()
+        {
+            _sessao.RemoveSessaoUsuario();
+            return RedirectToAction("Index", "Login");
         }
     }
 }

@@ -1,3 +1,4 @@
+using WebMusicShop.Helper;
 using WebMusicShop.Models.Context;
 using WebMusicShop.Models.Interfaces;
 using WebMusicShop.Models.Interfaces.ICliente;
@@ -6,6 +7,7 @@ using WebMusicShop.Models.Interfaces.IUsuario;
 using WebMusicShop.Models.Interfaces.IVenda;
 using WebMusicShop.Models.Repositories;
 using WebMusicShop.Models.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 //conexão com banco de dados
@@ -26,6 +28,14 @@ builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 builder.Services.AddScoped<IVendaContext, VendaContext>();
 builder.Services.AddScoped<IVendaRepository, VendaRepository>();
 builder.Services.AddScoped<IVendaService, VendaService>();
+//Sessão
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddScoped<ISessao, Sessao>();
+builder.Services.AddSession(o =>
+{
+    o.Cookie.HttpOnly = true;
+    o.Cookie.IsEssential = true;
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
@@ -45,6 +55,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
