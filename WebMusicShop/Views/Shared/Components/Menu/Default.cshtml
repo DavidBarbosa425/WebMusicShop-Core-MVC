@@ -14,9 +14,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Produto" asp-action="ListarProdutos">Produtos</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Usuario" asp-action="ListarUsuarios">Usuários</a>
-                        </li>
+
+                        @if(Model.Email.Equals("Admin@Admin")){
+
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" asp-area="" asp-controller="Usuario" asp-action="ListarUsuarios">Usuários</a>
+                                </li>
+                             }
+
+
                         <li class="nav-item">
                             <a class="nav-link text-white" asp-area="" asp-controller="Venda" asp-action="ListarVendas">Vendas</a>
                         </li>

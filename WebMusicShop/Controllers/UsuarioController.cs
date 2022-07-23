@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebMusicShop.Filters;
 using WebMusicShop.Models.Entities;
 using WebMusicShop.Models.Interfaces.IUsuario;
 
 namespace WebMusicShop.Controllers
 {
+    [PaginaRestritaSomenteAdmin]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioService _usuarioService;

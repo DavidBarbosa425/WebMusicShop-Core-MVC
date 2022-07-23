@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebMusicShop.Filters;
 using WebMusicShop.Models.Entities;
 using WebMusicShop.Models.Interfaces.ICliente;
 
 namespace WebMusicShop.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class ClienteController : Controller
     {
         private readonly IClienteService _clienteService;

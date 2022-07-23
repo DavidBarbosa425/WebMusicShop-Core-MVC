@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebMusicShop.Filters;
 using WebMusicShop.Models.Entities;
 using WebMusicShop.Models.Interfaces.IProduto;
 using WebMusicShop.Models.Services;
 
 namespace WebMusicShop.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class ProdutoController : Controller
     {
         public readonly IProdutoService _produtoService;

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebMusicShop.Filters;
 using WebMusicShop.Models.Entities;
 using WebMusicShop.Models.Interfaces.ICliente;
 using WebMusicShop.Models.Interfaces.IProduto;
@@ -7,6 +8,7 @@ using WebMusicShop.Models.Interfaces.IVenda;
 
 namespace WebMusicShop.Controllers
 {
+    [PaginaParaUsuarioLogado]
     public class VendaController : Controller
     {
         private readonly IVendaService _vendaService;
