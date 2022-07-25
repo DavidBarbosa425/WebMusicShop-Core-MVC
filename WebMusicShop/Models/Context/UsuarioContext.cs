@@ -27,7 +27,8 @@ namespace WebMusicShop.Models.Context
                 cmdIns.Parameters.Add("Nome", SqlDbType.VarChar).Value = usuario.Nome;
                 cmdIns.Parameters.Add("CPF", SqlDbType.VarChar).Value = usuario.CPF;
                 cmdIns.Parameters.Add("Email", SqlDbType.VarChar).Value = usuario.Email;
-                cmdIns.Parameters.Add("StatusId", SqlDbType.Int).Value = Convert.ToInt32(usuario.Status);
+                cmdIns.Parameters.Add("Senha", SqlDbType.VarChar).Value = usuario.Senha;
+                cmdIns.Parameters.Add("StatusId", SqlDbType.Int).Value = usuario.StatusEnum;
                 cmdIns.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -38,7 +39,7 @@ namespace WebMusicShop.Models.Context
             {
                 _connection.Close();
             }
-        }
+            }
 
         public List<Usuario> ListarUsuariosContext()
         {
@@ -87,7 +88,7 @@ namespace WebMusicShop.Models.Context
                 cmdUpd.Parameters.Add("Nome", SqlDbType.VarChar).Value = usuario.Nome;
                 cmdUpd.Parameters.Add("CPF", SqlDbType.VarChar).Value = usuario.CPF;
                 cmdUpd.Parameters.Add("Email", SqlDbType.VarChar).Value = usuario.Email;
-                cmdUpd.Parameters.Add("StatusId", SqlDbType.Int).Value = Convert.ToInt32(usuario.Status);
+                cmdUpd.Parameters.Add("StatusId", SqlDbType.Int).Value = usuario.StatusEnum;
                 cmdUpd.ExecuteNonQuery();
             }
             catch (Exception ex)

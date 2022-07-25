@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebMusicShop.Models.Enums;
 
 namespace WebMusicShop.Models.Entities
 {
@@ -19,7 +20,8 @@ namespace WebMusicShop.Models.Entities
         [Required(ErrorMessage ="Campo Telefone é obrigatório")]
         public string Telefone { get; set; }
         [Required(ErrorMessage = "Campo Status é obrigatório")]
-        public int StatusId { get; set; }
+        [Display(Name ="Status")]
+        public StatusCliente StatusEnum { get; set; }
         public string Status { get; set; }
     }
 }

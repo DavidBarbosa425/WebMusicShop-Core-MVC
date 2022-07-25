@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebMusicShop.Filters;
 using WebMusicShop.Models.Entities;
+using WebMusicShop.Models.Enums;
 using WebMusicShop.Models.Interfaces.ICliente;
 using WebMusicShop.Models.Interfaces.IProduto;
 using WebMusicShop.Models.Interfaces.IUsuario;
@@ -44,7 +45,7 @@ namespace WebMusicShop.Controllers
             {
                 Cliente cliente = _clienteService.BuscaCliente(venda.ClienteId);
 
-                if (cliente.Status.Equals("Inativo") || cliente.Status.Equals("Bloqueado"))
+                if (cliente.Status == StatusCliente.Inativo.ToString() || cliente.Status == StatusCliente.Bloqueado.ToString())
                 {
                     TempData["MensagemErro"] = "Venda não pode ser efetuada, cliente esta inativo ou bloqueado";
                     return RedirectToAction("ListarVendas");
@@ -52,7 +53,7 @@ namespace WebMusicShop.Controllers
 
                 Usuario usuario = _usuarioService.BuscaUsuarioService(venda.UsuarioId);
 
-                if (usuario.Status.Equals("Inativo") || usuario.Status.Equals("Bloqueado"))
+                if (usuario.Status == StatusUsuario.Inativo.ToString() || usuario.Status == StatusUsuario.Bloqueado.ToString())
                 {
                     TempData["MensagemErro"] = "Venda não pode ser efetuada, usuário esta inativo ou bloqueado";
                     return RedirectToAction("ListarVendas");

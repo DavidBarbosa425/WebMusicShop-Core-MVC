@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebMusicShop.Models.Enums;
 
 namespace WebMusicShop.Models.Entities
 {
@@ -15,9 +16,9 @@ namespace WebMusicShop.Models.Entities
         public string Email { get; set; }
         [Required(ErrorMessage = "O campo nome Senha obrigatório")]
         public string Senha { get; set; }
-        [Required(ErrorMessage = "O campo nome StatusId obrigatório")]
-        public int StatusId { get; set; }
         [Required(ErrorMessage = "O campo nome Status obrigatório")]
+        [Display(Name ="Status")]
+        public StatusUsuario StatusEnum { get; set; }
         public string Status { get; set; }
 
         public bool SenhaValida(string senha)

@@ -14,7 +14,7 @@ namespace WebMusicShop.Controllers
             _clienteService = clienteService;
         }
         [HttpPost]
-        public IActionResult CadastrarCliente([Bind("Nome,CPF,Email,Telefone,Status")] Cliente cliente)
+        public IActionResult CadastrarCliente([Bind("Nome,CPF,Email,Telefone,StatusEnum")] Cliente cliente)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace WebMusicShop.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AtualizaCliente([Bind("Id, Nome, CPF, Email, Telefone, Status")] Cliente cliente)
+        public IActionResult AtualizaCliente([Bind("Id, Nome, CPF, Email, Telefone, StatusEnum")] Cliente cliente)
         {
             try
             {
