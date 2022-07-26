@@ -20,7 +20,7 @@ namespace WebMusicShop.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CadastraUsuario([Bind("Nome,CPF,Email,Senha,StatusEnum")] Usuario usuario)
+        public IActionResult CadastraUsuario([Bind("Nome,CPF,Email,Senha,StatusEnum,PerfilEnum")] Usuario usuario)
         {
             try
             {
@@ -76,7 +76,7 @@ namespace WebMusicShop.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult AtualizaUsuario([Bind("Id,Nome,CPF,Email,StatusEnum")]Usuario usuario)
+        public IActionResult AtualizaUsuario([Bind("Id,Nome,CPF,Email,StatusEnum, PerfilEnum")]Usuario usuario)
         {
             try
             {

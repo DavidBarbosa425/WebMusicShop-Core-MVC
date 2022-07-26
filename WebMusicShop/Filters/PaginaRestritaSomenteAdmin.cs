@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Newtonsoft.Json;
 using WebMusicShop.Models.Entities;
+using WebMusicShop.Models.Enums;
 
 namespace WebMusicShop.Filters
 {
@@ -24,7 +25,7 @@ namespace WebMusicShop.Filters
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { { "controller", "Login" }, { "action", "Index" } });
                 }
 
-                if (usuario.Email != "Admin@Admin")
+                if (usuario.Perfil != Perfil.Administrador.ToString())
                 {
                     context.Result = new RedirectToRouteResult(new RouteValueDictionary { {"controller","Restrito" }, {"action","Index" } });
                     

@@ -29,6 +29,7 @@ namespace WebMusicShop.Models.Context
                 cmdIns.Parameters.Add("Email", SqlDbType.VarChar).Value = usuario.Email;
                 cmdIns.Parameters.Add("Senha", SqlDbType.VarChar).Value = usuario.Senha;
                 cmdIns.Parameters.Add("StatusId", SqlDbType.Int).Value = usuario.StatusEnum;
+                cmdIns.Parameters.Add("PerfilId", SqlDbType.Int).Value = usuario.PerfilEnum;
                 cmdIns.ExecuteNonQuery();
             }
             catch (Exception ex)
@@ -62,6 +63,7 @@ namespace WebMusicShop.Models.Context
                     usuario.Email = dataReader.GetString("Email");
                     usuario.Senha = dataReader.GetString("Senha");
                     usuario.Status = dataReader.GetString("Status");
+                    usuario.Perfil = dataReader.GetString("Perfil");
                     usuarios.Add(usuario);
                 }
                 return usuarios;
@@ -89,6 +91,7 @@ namespace WebMusicShop.Models.Context
                 cmdUpd.Parameters.Add("CPF", SqlDbType.VarChar).Value = usuario.CPF;
                 cmdUpd.Parameters.Add("Email", SqlDbType.VarChar).Value = usuario.Email;
                 cmdUpd.Parameters.Add("StatusId", SqlDbType.Int).Value = usuario.StatusEnum;
+                cmdUpd.Parameters.Add("PerfilId", SqlDbType.Int).Value = usuario.PerfilEnum;
                 cmdUpd.ExecuteNonQuery();
             }
             catch (Exception ex)
