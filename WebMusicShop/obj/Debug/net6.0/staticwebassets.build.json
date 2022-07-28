@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "C2xjRwegGpA0iJumxKRatxyAVAmBHLLn7VAKTu9r8YU=",
+  "Hash": "QUt/oDZD2k+TH13zQW/2kPvR91i+7tPJsiokbw5q4gU=",
   "Source": "WebMusicShop",
   "BasePath": "_content/WebMusicShop",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\DAVID\\Documents\\Estudos\\WebMusicShop\\WebMusicShop\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\WebMusicShop.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\DAVID\\Documents\\Estudos\\WebMusicShop\\WebMusicShop\\wwwroot\\css\\datatables.min.css",
+      "SourceId": "WebMusicShop",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\DAVID\\Documents\\Estudos\\WebMusicShop\\WebMusicShop\\wwwroot\\",
+      "BasePath": "_content/WebMusicShop",
+      "RelativePath": "css/datatables.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\datatables.min.css"
     },
     {
       "Identity": "C:\\Users\\DAVID\\Documents\\Estudos\\WebMusicShop\\WebMusicShop\\wwwroot\\css\\site.css",
