@@ -15,6 +15,7 @@ namespace WebMusicShop.Models.Services
         {
             try
             {
+                 usuario.SetSenhaHash();
                 _usuarioRepository.CadastraUsuarioRepository(usuario);
             }
             catch (Exception ex)
@@ -54,6 +55,7 @@ namespace WebMusicShop.Models.Services
         {
             try
             {
+                 usuario.SetSenhaHash();
                 _usuarioRepository.AtualizaUsuarioRepoSitory(usuario);
             }
             catch (Exception ex)

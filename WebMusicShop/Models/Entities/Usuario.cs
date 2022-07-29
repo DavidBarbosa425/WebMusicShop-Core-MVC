@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WebMusicShop.Helper;
 using WebMusicShop.Models.Enums;
 
 namespace WebMusicShop.Models.Entities
@@ -27,7 +28,12 @@ namespace WebMusicShop.Models.Entities
 
         public bool SenhaValida(string senha)
         {
-            return Senha == senha;
+            return Senha == senha.GerarHash();
+        }
+
+        public void SetSenhaHash()
+        {
+            Senha = Senha.GerarHash();
         }
     }
 }

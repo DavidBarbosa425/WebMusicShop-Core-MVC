@@ -25,6 +25,7 @@ namespace WebMusicShop.Controllers
             try
             {
                 _usuarioService.CadastraUsuarioService(usuario);
+                TempData["MensagemSucesso"] = "Usuário cadastrado com sucesso!";
                 return RedirectToAction("ListarUsuarios");
             }
             catch (Exception ex)
@@ -81,6 +82,7 @@ namespace WebMusicShop.Controllers
             try
             {
                 _usuarioService.AtualizaUsuarioService(usuario);
+                TempData["MensagemSucesso"] = "Usuário atualizado com sucesso!";
                 return RedirectToAction("ListarUsuarios");
             }
             catch (Exception ex)
