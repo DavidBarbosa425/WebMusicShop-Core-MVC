@@ -2,9 +2,15 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-
 $(document).ready(function () {
-    $('#table-produtos').DataTable({
+    getDatatable('#table-produtos');
+    getDatatable('#table-clientes');
+    getDatatable('#table-usuarios');
+    getDatatable('#table-vendas');
+})
+
+function getDatatable(id) {
+    $(id).DataTable({
         "ordering": true,
         "paging": true,
         "searching": true,
@@ -32,7 +38,7 @@ $(document).ready(function () {
             }
         }
     });
-});
+}
 
 $('.btn-close').click(function () {
     $('.alert').hide('hide');
