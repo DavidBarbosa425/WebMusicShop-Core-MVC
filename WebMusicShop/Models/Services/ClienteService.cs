@@ -79,5 +79,20 @@ namespace WebMusicShop.Models.Services
             }
             
         }
+
+        public List<string> PesquisarClientesService(string term)
+        {
+            List<string> filtro = new List<string>();
+            var clientes = _clienteRepository.ListarClientesRepository().Select(x => new { Id = x.Id, Nome = x.Nome });
+
+            foreach (var cliente in clientes)
+            {
+                string clienteConcat = cliente.Id.ToString() + " - " + cliente.Nome.ToString();
+                filtro.Add(clienteConcat);
+            }
+
+            List<string> filtrarClientes = filtro.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            return filtrarClientes;
+        }
     }
 }
