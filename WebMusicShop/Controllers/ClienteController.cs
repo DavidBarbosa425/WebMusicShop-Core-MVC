@@ -130,7 +130,6 @@ namespace WebMusicShop.Controllers
 
         public IActionResult PesquisarClientes(string term)
         {
-
                 List<string> clientes = _clienteService.PesquisarClientesService(term);
                 return Json(clientes);
         }

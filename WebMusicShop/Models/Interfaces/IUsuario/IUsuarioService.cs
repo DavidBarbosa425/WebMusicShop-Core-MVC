@@ -9,5 +9,6 @@ namespace WebMusicShop.Models.Interfaces.IUsuario
         Usuario BuscaUsuarioService(int id);
         void AtualizaUsuarioService(Usuario usuario);
         void DeletaUsuarioService(int id);
+        List<string> PesquisarUsuariosService(string term);
     }
 }

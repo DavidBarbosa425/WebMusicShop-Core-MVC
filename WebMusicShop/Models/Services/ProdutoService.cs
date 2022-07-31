@@ -56,13 +56,14 @@ namespace WebMusicShop.Models.Services
         {
             try
             {
+                if (produto.QtdEstoque < 0) throw new Exception("Quantidade em Estoque não pode ser menor do que 0(zero)");
                 _produtoRepository.AtualizarProdutoRepository(produto);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            
+
         }
 
         public void DeletaProdutoService(int id)
@@ -75,6 +76,21 @@ namespace WebMusicShop.Models.Services
             {
                 throw new Exception(ex.Message);
             }
+        }
+
+        public List<string> PesquisarProdutosService(string term)
+        {
+            List<string> filtro = new List<string>();
+            var produtos = _produtoRepository.ListarProdutosRepository().Select(x => new { Id = x.Id, Tipo = x.Tipo });
+
+            foreach (var produto in produtos)
+            {
+                string produtoConcat = produto.Id.ToString() + " - " + produto.Tipo.ToString();
+                filtro.Add(produtoConcat);
+            }
+
+            List<string> filtrarProdutos = filtro.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            return filtrarProdutos;
         }
     }
 }

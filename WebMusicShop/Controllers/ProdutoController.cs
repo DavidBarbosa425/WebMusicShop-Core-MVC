@@ -85,12 +85,6 @@ namespace WebMusicShop.Controllers
         {
             try
             {
-                if (produto.QtdEstoque < 0)
-                {
-                    TempData["MensagemErro"] = "Quantidade em Estoque não pode ser menor do que 0";
-                    return RedirectToAction("AtualizaProduto");
-                }
-
                 _produtoService.AtualizaProdutoService(produto);
                 TempData["MensagemSucesso"] = "Produto Atualizado com sucesso!";
                 return RedirectToAction("ListarProdutos");
@@ -134,17 +128,8 @@ namespace WebMusicShop.Controllers
         }
         public IActionResult PesquisarProdutos(string term)
         {
-            List<string> filtro = new List<string>();
-            var produtos = _produtoService.ListarProdutosService().Select(x => new { Id = x.Id, Tipo = x.Tipo });
-
-            foreach (var produto in produtos)
-            {
-                string produtoConcat = produto.Id.ToString() + " - " + produto.Tipo.ToString();
-                filtro.Add(produtoConcat);
-            }
-
-            var filtrarProdutos = filtro.Where(p => p.Contains(term, StringComparison.CurrentCultureIgnoreCase));
-            return Json(filtrarProdutos);
+            List<string> produto = _produtoService.PesquisarProdutosService(term);
+            return Json(produto);
         }
     }
 }

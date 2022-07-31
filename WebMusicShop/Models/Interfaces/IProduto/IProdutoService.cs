@@ -9,5 +9,6 @@ namespace WebMusicShop.Models.Interfaces.IProduto
         Produto BuscaProdutoService(int id);
         void AtualizaProdutoService(Produto produto);
         void DeletaProdutoService(int id);
+        List<string> PesquisarProdutosService(string term);
     }
 }

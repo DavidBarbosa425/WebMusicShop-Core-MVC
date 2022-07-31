@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using WebMusicShop.Filters;
 using WebMusicShop.Models.Entities;
-using WebMusicShop.Models.Enums;
-using WebMusicShop.Models.Interfaces.ICliente;
-using WebMusicShop.Models.Interfaces.IProduto;
-using WebMusicShop.Models.Interfaces.IUsuario;
 using WebMusicShop.Models.Interfaces.IVenda;
 
 namespace WebMusicShop.Controllers
@@ -13,16 +9,10 @@ namespace WebMusicShop.Controllers
     public class VendaController : Controller
     {
         private readonly IVendaService _vendaService;
-        public readonly IProdutoService _produtoService;
-        public readonly IClienteService _clienteService;
-        public readonly IUsuarioService _usuarioService;
 
-        public VendaController(IVendaService vendaService, IProdutoService produtoService, IClienteService clienteService, IUsuarioService usuarioService)
+        public VendaController(IVendaService vendaService)
         {
             _vendaService = vendaService;
-            _produtoService = produtoService;
-            _clienteService = clienteService;
-            _usuarioService = usuarioService;
         }
 
         public IActionResult CadastraVenda()
@@ -33,46 +23,8 @@ namespace WebMusicShop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CadastraVenda([Bind("Produto,Cliente,Usuario,Quantidade")] Venda venda)
         {
-            string[] p = venda.Produto.Split(" - ");
-            string[] c = venda.Cliente.Split(" - ");
-            string[] u = venda.Usuario.Split(" - ");
-
-            venda.ProdutoId = int.Parse(p[0]);
-            venda.ClienteId = int.Parse(c[0]);
-            venda.UsuarioId = int.Parse(u[0]);
-
             try
             {
-                Cliente cliente = _clienteService.BuscaCliente(venda.ClienteId);
-
-                if (cliente.Status == StatusCliente.Inativo.ToString() || cliente.Status == StatusCliente.Bloqueado.ToString())
-                {
-                    TempData["MensagemErro"] = "Venda não pode ser efetuada, cliente esta inativo ou bloqueado";
-                    return RedirectToAction("ListarVendas");
-                }
-
-                Usuario usuario = _usuarioService.BuscaUsuarioService(venda.UsuarioId);
-
-                if (usuario.Status == StatusUsuario.Inativo.ToString() || usuario.Status == StatusUsuario.Bloqueado.ToString())
-                {
-                    TempData["MensagemErro"] = "Venda não pode ser efetuada, usuário esta inativo ou bloqueado";
-                    return RedirectToAction("ListarVendas");
-                }
-
-                Produto produto = _produtoService.BuscaProdutoService(venda.ProdutoId);
-
-                if (produto.QtdEstoque < venda.Quantidade || produto.QtdEstoque == 0)
-                {
-                    TempData["MensagemErro"] = "Quantidade em Estoque Insuficiente";
-                    return RedirectToAction("ListarVendas");
-                }
-
-                if (venda.Quantidade <= 0)
-                {
-                    TempData["MensagemErro"] = "Insira a Quantidade de Produtos";
-                    return RedirectToAction("ListarVendas");
-                }
-
                 _vendaService.CadastraVendaService(venda);
                 TempData["MensagemSucesso"] = "Venda Cadastrada com Sucesso!";
                 return RedirectToAction("ListarVendas");
@@ -117,14 +69,7 @@ namespace WebMusicShop.Controllers
             try
             {
                 Venda venda = _vendaService.BuscaVendaService(id);
-                Venda? vendaIdNome = _vendaService.ListarVendasService().Find(x => x.Id == venda.Id);
-                vendaIdNome.Produto = venda.ProdutoId.ToString() + " - " + vendaIdNome.Produto.ToString();
-                vendaIdNome.Cliente = venda.ClienteId.ToString() + " - " + vendaIdNome.Cliente.ToString();
-                vendaIdNome.Usuario = venda.UsuarioId.ToString() + " - " + vendaIdNome.Usuario.ToString();
-                vendaIdNome.Quantidade = venda.Quantidade;
-
-
-                return View(vendaIdNome);
+                return View(venda);
             }
             catch (Exception ex)
             {
@@ -137,45 +82,8 @@ namespace WebMusicShop.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult AtualizaVenda([Bind("Id,Produto,Cliente,Usuario,Quantidade")] Venda venda)
         {
-            string[] p = venda.Produto.Split(" - ");
-            string[] c = venda.Cliente.Split(" - ");
-            string[] u = venda.Usuario.Split(" - ");
-
-            venda.ProdutoId = int.Parse(p[0]);
-            venda.ClienteId = int.Parse(c[0]);
-            venda.UsuarioId = int.Parse(u[0]);
-
             try
             {
-                Produto produto = _produtoService.BuscaProdutoService(venda.ProdutoId);
-                Venda ultimaVenda = _vendaService.BuscaVendaService(venda.Id);
-                var qtdVendaAtualizar = 0;
-
-                if (ultimaVenda.Quantidade < venda.Quantidade)
-                {
-                    qtdVendaAtualizar = venda.Quantidade - ultimaVenda.Quantidade;
-                    produto.QtdEstoque -= qtdVendaAtualizar;
-                    
-                }
-
-                if (ultimaVenda.Quantidade > venda.Quantidade)
-                {
-                    qtdVendaAtualizar = ultimaVenda.Quantidade - venda.Quantidade;
-                    produto.QtdEstoque += qtdVendaAtualizar;
-                }
-
-                if (produto.QtdEstoque < 0)
-                {
-                    TempData["MensagemErro"] = "Quantidade em Estoque Insuficiente";
-                    return RedirectToAction("ListarVendas");
-                }
-                if (venda.Quantidade == 0)
-                {
-                    TempData["MensagemErro"] = "Insira a Quantidade de Produtos";
-                    return RedirectToAction("ListarVendas");
-                }
-
-                _produtoService.AtualizaProdutoService(produto);
                 _vendaService.AtualizaVendaService(venda);
                 TempData["MensagemSucesso"] = "Venda Atualizada com Sucesso!";
                 return RedirectToAction("ListarVendas");
